@@ -168,3 +168,5 @@ fabric.properties
 
 results.xml
 coverage.xml
+
+design/GPUCache/
