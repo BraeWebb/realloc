@@ -510,6 +510,6 @@
 }
 
 .schedule-rows td[data-selected],
-.schedule-rows td[data-selecting] { background-color: #55c050; }
+.schedule-rows td[data-selecting] { background-color: #4e9ce0; }
 
 .schedule-rows td[data-disabled] { opacity: 0.55; }
