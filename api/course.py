@@ -25,6 +25,9 @@ class Course:
 
         return Course(id)
 
+    def json(self):
+        return {"id": self.id, "name": self.name}
+
     def get_users(self):
         with Database() as db:
             sql = 'SELECT user_id FROM course_association WHERE course_id = %s'

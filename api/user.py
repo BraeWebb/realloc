@@ -14,7 +14,7 @@ class User:
         with Database() as db:
             if db.exists("user", id=self.id):
                 sql = 'SELECT "email", permissions FROM "user" WHERE id = %s'
-                self.date, self.payer, self.payee = db.query(sql, self.id, limit=1)[0]
+                self.email, self.permissions = db.query(sql, self.id, limit=1)[0]
             else:
                 raise KeyError('User {} not found'.format(self.id))
 
@@ -26,7 +26,24 @@ class User:
 
             db.query(sql, id, email, permissions)
 
-        return User(id)
+            return User(id)
+
+    def update(self, email, permissions):
+        with Database() as db:
+            sql = 'UPDATE "user" SET (email, permissions) = (%s, %s) where id = %s'
+            db.query(sql, email, permissions, self.id)
+
+    @staticmethod
+    def list_users():
+        with Database() as db:
+            sql = 'SELECT id FROM "user"'
+            result = db.query(sql)
+
+            return [User(row[0]) for row in result]
+
+    def json(self):
+        return {"id": self.id, "email": self.email,
+                "permissions": self.permissions}
 
     def get_courses(self):
         with Database() as db:
