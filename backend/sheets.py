@@ -61,7 +61,7 @@ class Session:
         self.end_time = end_time
 
     def __repr__(self):
-        return "Session:course_id={}, session_id={}, day={}, start_time={}, end_time={}".format(self.course_id,
+        return "Session:course_id={}, session_id={}, day={}, start_time={}, endR_time={}".format(self.course_id,
                                                                                                 self.session_id,
                                                                                                 self.day,
                                                                                                 self.start_time,
