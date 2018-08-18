@@ -170,3 +170,5 @@ results.xml
 coverage.xml
 
 design/GPUCache/
+
+frontend/node_modules/

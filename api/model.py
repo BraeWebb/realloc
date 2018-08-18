@@ -122,6 +122,7 @@ class Course:
 
             return [Session(row[0]) for row in result]
 
+
 class Session:
     def __init__(self, id, course):
         self.id = id
