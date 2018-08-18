@@ -33,7 +33,7 @@ def create_tables(connection):
                             user_id integer NOT NULL,
                             "day" date NOT NULL,
                             start time NOT NULL,
-                            end time);""")
+                            "end" time);""")
 
 
 def create_relations(connection):
