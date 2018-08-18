@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  {% block title %}
+  Course
+  {% endblock %}
+{% endblock %}
+
+{% block content %}
+
+<!-->
+    <form method="POST">
+        <div class="form-group">
+            <label for="name" class="form-label">Course Name</label>
+            <input name="name" type="text" class="form-control" id="name" placeholder="Enter course name" value={{ request.form['name'] }}>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Submit">
+    </form>
+//-->
+{% endblock %}
