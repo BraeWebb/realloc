@@ -7,13 +7,12 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    return render_template("templates/index.html")
 
 
 @app.route('/api/user', methods=['GET'])
 def view_users():
-    # return jsonify([user.json() for user in User.list_users()])
-    return jsonify([User(1).json()])
+    return jsonify([user.json() for user in User.list_users()])
 
 
 @app.route('/api/user', methods=['POST'])
