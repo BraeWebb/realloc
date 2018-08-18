@@ -1,5 +1,4 @@
-from database import *
-
+from api.database import *
 
 DATABASE_TABLES = ("user", "course", "session", "availability")
 DATABASE_RELATIONS = ("allocation", "course_association")

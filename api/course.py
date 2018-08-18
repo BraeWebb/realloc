@@ -42,3 +42,14 @@ class Course:
             result = db.query(sql, revision, self.id)
 
             return result
+
+    def get_users(self):
+        with Database() as db:
+            sql = 'SELECT user_id FROM course_association WHERE course_id = %s'
+            result = db.query(sql, self.id)
+
+            return [Course(row[0]) for row in result]
+
+    def get_sessions(self):
+        with Database() as db:
+            pass

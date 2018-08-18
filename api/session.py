@@ -28,3 +28,6 @@ class Session:
             db.query(sql, id, course, start, end, day, location)
 
         return Session(id, course)
+
+    def json(self):
+        return self.__dict__

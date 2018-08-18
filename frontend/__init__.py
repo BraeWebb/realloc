@@ -1,6 +1,6 @@
 from flask import Flask, render_template, jsonify, request, abort
 
-from api.user import User, Course
+from api.user import User, Course, Session
 
 app = Flask(__name__)
 
@@ -74,5 +74,49 @@ def view_courses():
     return jsonify([course.json() for course in Course.list_courses()])
 
 
+@app.route('/api/course/<course>', methods=['GET'])
+def view_course(course):
+    try:
+        course = Course(course)
+    except KeyError:
+        abort(404)
+    return jsonify(**course.json())
+
+
+@app.route('/api/course/<course>/users', methods=['GET'])
+def view_course_users(course):
+    try:
+        course = Course(course)
+    except KeyError:
+        abort(404)
+    return jsonify([user.json() for user in course.get_users()])
+
+
+def view_course_sessions(course):
+    pass
+
+
+@app.route('/api/user/<course>/allocation/<revision>', methods=['GET'])
+def view_allocation(course, revision):
+    try:
+        course = Course(course)
+    except KeyError:
+        abort(404)
+    return jsonify(**course.get_allocation(revision))
+
+
+@app.route('/api/course', methods=['POST'])
+def create_course():
+    course = Course.create(request.form.get('name'))
+    return jsonify(**course.json()), 201
+
+
+@app.route('/api/session', methods=['POST'])
+def create_session():
+    session = Session.create(request.form.get('course'), request.form.get('start'), request.form.get('end'),
+                             request.form.get('day'), request.form.get('location'))
+    return jsonify(**session.json()), 201
+
+
 if __name__ == '__main__':
-    app.run(debug=True, port=2468)
+    app.run(debug=True, port=5432)
