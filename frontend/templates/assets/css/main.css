@@ -2990,6 +2990,9 @@
 
 			#banner .flex div {
 				border-right: 2px solid rgba(255, 255, 255, 0.2);
+				flex-basis: 0;
+				flex-anchor: 1;
+				flex-end: 1;
 				padding: 0 8em;
 			}
 
