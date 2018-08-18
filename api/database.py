@@ -1,6 +1,19 @@
 import psycopg2
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
+HOST = None
+USER = None
+PASSWORD = None
+DATABASE = None
+try:
+    import config
+    HOST = config.host
+    USER = config.user
+    PASSWORD = config.password
+    DATABASE = config.database
+except ImportError:
+    pass
+
 
 class Database:
     """
@@ -8,7 +21,7 @@ class Database:
     with a context manager.
     """
 
-    def __init__(self, host=None, user=None, password=None, database=None):
+    def __init__(self, host=HOST, user=USER, password=PASSWORD, database=DATABASE):
         """Establish a connection to the database and initialize the class"""
         self.db = psycopg2.connect(host=host, user=user, password=password,
                                    database=database)

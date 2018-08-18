@@ -7,7 +7,7 @@ DATABASE_RELATIONS = ("allocation", "course_association")
 
 def create_tables(connection):
     # create user table
-    connection.query("""CREATE TABLE user (
+    connection.query("""CREATE TABLE "user" (
                         id integer NOT NULL PRIMARY KEY,
                         email text NOT NULL,
                         password text NOT NULL,
@@ -17,17 +17,17 @@ def create_tables(connection):
                         id integer NOT NULL PRIMARY KEY,
                         name text NOT NULL);""")
     # create session table
-    connection.query("""CREATE TABLE session (
+    connection.query("""CREATE TABLE "session" (
                         id integer NOT NULL PRIMARY KEY,
                         course_id integer NOT NULL PRIMARY KEY,
                         start time NOT NULL,
-                        end time NOT NULL,
-                        day date NOT NULL,
+                        "end" time NOT NULL,
+                        "day" date NOT NULL,
                         location text);""")
     # create availability table
     connection.query("""CREATE TABLE availability (
                         user_id integer NOT NULL,
-                        day date NOT NULL,
+                        "day" date NOT NULL,
                         start time NOT NULL,
                         end time);""")
 
