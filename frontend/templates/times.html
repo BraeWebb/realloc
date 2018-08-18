@@ -1,108 +1,85 @@
-<!DOCTYPE HTML>
-<!--
-	Projection by TEMPLATED
-	templated.co @templatedco
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
--->
-<html>
-	<head>
-		<title>realloc</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="/static/assets/css/main.css" />
-	</head>
-	<body>
+{% extends 'base.html' %}
 
-		<!-- Header -->
-			<header id="header">
-				<div class="inner">
-					<a href="/" class="logo"><strong>realloc</strong> by BLEH</a>
-					<nav id="nav">
-						<a href="/">Home</a>
-						<a href="elements.html">Tutor Portal</a>
-					</nav>
-					<a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
-				</div>
-			</header>
+{% block header %}
+    {% block title %}
+        New Allocation
+    {% endblock %}
+{% endblock %}
 
-			<footer id="footer">
-				<div class="inner">
+{% block content %}
+<div class="inner">
 
-					<h3>Enter Classes </h3>
+    <form action="#" method="post">
+        <div id="allocform" style="overflow-y: auto; height: 50vh;">
+        <div class="field quater first">
+            <label for="name">Class Name</label>
+            <input name="name" id="name" type="text" placeholder="Class">
+        </div>
+        <div class="field quater first">
+            <label for="email">Weekday</label>
+            <select>
+              <option selected disabled>Weekday</option>
+              <option value="mon">Monday</option>
+              <option value="tue">Tuesday</option>
+              <option value="wed">Wednesday</option>
+              <option value="thu">Thursday</option>
+              <option value="fri">Friday</option>
+            </select>
+        </div>
+        <div class="field quater first">
+            <label for="email">Start Time</label>
+            <select>
+              <option selected disabled>Start</option>
+              <option value="mon">8:00</option>
+              <option value="tue">9:00</option>
+              <option value="wed">10:00</option>
+              <option value="thu">11:00</option>
+              <option value="fri">12:00</option>
+              <option value="fri">13:00</option>
+              <option value="fri">14:00</option>
+              <option value="fri">15:00</option>
+              <option value="fri">16:00</option>
+              <option value="fri">17:00</option>
+              <option value="fri">18:00</option>
+              <option value="fri">19:00</option>
+              <option value="fri">20:00</option>
+            </select>
+        </div>
+        <div class="field quater">
+            <label for="message">End Time</label>
+            <select>
+              <option selected disabled>End</option>
+              <option value="mon">8:00</option>
+              <option value="tue">9:00</option>
+              <option value="wed">10:00</option>
+              <option value="thu">11:00</option>
+              <option value="fri">12:00</option>
+              <option value="fri">13:00</option>
+              <option value="fri">14:00</option>
+              <option value="fri">15:00</option>
+              <option value="fri">16:00</option>
+              <option value="fri">17:00</option>
+              <option value="fri">18:00</option>
+              <option value="fri">19:00</option>
+              <option value="fri">20:00</option>
+            </select>
+        </div>
+    </div>
+        <div align="right">
+            <input value="Add row" id="addrow" class="button alt" type="submit">
+        </div>
+        <ul class="actions">
+                <li><input value="Submit" class="button alt big" type="submit"></li>
+            </ul>
+    </form>
 
-					<form action="#" method="post">
-						<div id="allocform" style="overflow-y: auto; height: 50vh;">
-						<div class="field quater first">
-							<label for="name">Class Name</label>
-							<input name="name" id="name" type="text" placeholder="Class">
-						</div>
-						<div class="field quater first">
-							<label for="email">Weekday</label>
-							<select>
-							  <option selected disabled>Weekday</option>
-							  <option value="mon">Monday</option>
-							  <option value="tue">Tuesday</option>
-							  <option value="wed">Wednesday</option>
-							  <option value="thu">Thursday</option>
-							  <option value="fri">Friday</option>
-							</select>
-						</div>
-						<div class="field quater first">
-							<label for="email">Start Time</label>
-							<select>
-							  <option selected disabled>Start</option>
-							  <option value="mon">8:00</option>
-							  <option value="tue">9:00</option>
-							  <option value="wed">10:00</option>
-							  <option value="thu">11:00</option>
-							  <option value="fri">12:00</option>
-							  <option value="fri">13:00</option>
-							  <option value="fri">14:00</option>
-							  <option value="fri">15:00</option>
-							  <option value="fri">16:00</option>
-							  <option value="fri">17:00</option>
-							  <option value="fri">18:00</option>
-							  <option value="fri">19:00</option>
-							  <option value="fri">20:00</option>
-							</select>
-						</div>
-						<div class="field quater">
-							<label for="message">End Time</label>
-							<select>
-							  <option selected disabled>End</option>
-							  <option value="mon">8:00</option>
-							  <option value="tue">9:00</option>
-							  <option value="wed">10:00</option>
-							  <option value="thu">11:00</option>
-							  <option value="fri">12:00</option>
-							  <option value="fri">13:00</option>
-							  <option value="fri">14:00</option>
-							  <option value="fri">15:00</option>
-							  <option value="fri">16:00</option>
-							  <option value="fri">17:00</option>
-							  <option value="fri">18:00</option>
-							  <option value="fri">19:00</option>
-							  <option value="fri">20:00</option>
-							</select>
-						</div>
-					</div>
-						<div align="right">
-							<input value="Add row" id="addrow" class="button alt" type="submit">
-						</div>
-						<ul class="actions">
-								<li><input value="Submit" class="button alt big" type="submit"></li>
-							</ul>
-					</form>
+</div>
 
-				</div>
-			</footer> 
+<!-- Scripts -->
+<script src="/static/assets/js/jquery.min.js"></script>
+<script src="/static/assets/js/skel.min.js"></script>
+<script src="/static/assets/js/util.js"></script>
+<script src="/static/assets/js/main.js"></script>
+<script src="/static/assets/js/frm.js"></script>
 
-		<!-- Scripts -->
-			<script src="/static/assets/js/jquery.min.js"></script>
-			<script src="/static/assets/js/skel.min.js"></script>
-			<script src="/static/assets/js/util.js"></script>
-			<script src="/static/assets/js/main.js"></script>
-			<script src="/static/assets/js/frm.js"></script>
-
-	</body>
-</html>
+{% endblock %}

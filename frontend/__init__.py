@@ -7,11 +7,13 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template("base.html")
+    return render_template("promo.html")
+
 
 @app.route('/dashboard')
-def database():
+def dashboard():
     return render_template("dashboard.html")
+
 
 @app.route('/coordinator')
 def coordinator():

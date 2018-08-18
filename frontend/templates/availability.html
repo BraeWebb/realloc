@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Availability</title>
-    <link rel="stylesheet" type="text/css" href="/static/assets/css/availability-style.css">
-    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
-    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-</head>
+{% extends 'base.html' %}
 
-<body>
+{% block header %}
+    {% block title %}
+        Availability
+    {% endblock %}
+{% endblock %}
 
-<h2 align="center">Availability</h2>
+{% block content %}
 <div id="day-schedule" align="center"></div>
 
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -56,6 +52,4 @@ function send() {
     }
 }
 </script>
-
-</body>
-</html>
+{% endblock %}
