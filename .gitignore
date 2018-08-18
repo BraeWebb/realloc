@@ -165,3 +165,6 @@ fabric.properties
 .idea/httpRequests
 
 .idea/
+
+results.xml
+coverage.xml
