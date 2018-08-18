@@ -1,6 +1,6 @@
 from flask import Flask, render_template, jsonify, request, abort
 
-from api.user import User
+from api.user import User, Course
 
 app = Flask(__name__)
 
@@ -67,6 +67,11 @@ def view_user_courses(user):
     except KeyError:
         abort(404)
     return jsonify([course.json() for course in user.get_courses()])
+
+
+@app.route('/api/course', methods=['GET'])
+def view_courses():
+    return jsonify([course.json() for course in Course.list_courses()])
 
 
 if __name__ == '__main__':
