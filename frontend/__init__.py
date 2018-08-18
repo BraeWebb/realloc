@@ -41,7 +41,7 @@ def update_user(user):
 
 
 @app.route('/api/user/<user>/availability', methods=['GET'])
-def add_availability(user):
+def view_availability(user):
     try:
         user = User(user)
     except KeyError:
