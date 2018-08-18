@@ -4,7 +4,7 @@ function click() {
 				</div> \
 				<div class=\"field quater first\"> \
 				<select> \
-					<option selected disabled>Weekday</option>
+					<option selected disabled>Weekday</option> \
 					<option value=\"mon\">Monday</option> \
 					<option value=\"tue\">Tuesday</option> \
 					<option value=\"wed\">Wednesday</option> \
@@ -14,7 +14,7 @@ function click() {
 				</div> \
 				<div class=\"field quater first\"> \
 					<select> \
-						      <option selected disabled>Start</option>
+						      <option selected disabled>Start</option> \
 							  <option value=\"8\">8:00</option> \
 							  <option value=\"9\">9:00</option> \
 							  <option value=\"10\">10:00</option> \
@@ -32,7 +32,7 @@ function click() {
 						</div> \
 						<div class=\"field quater\"> \
 							<select> \
-						      <option selected disabled>End</option>
+						      <option selected disabled>End</option> \
 							  <option value=\"8\">8:00</option> \
 							  <option value=\"9\">9:00</option> \
 							  <option value=\"10\">10:00</option> \
