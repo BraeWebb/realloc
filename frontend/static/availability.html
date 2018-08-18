@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Availability</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/availability-style.css">
+    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <style>
+        body { font-family:'roboto'; background-color:#ECF0F1; }
+  </style>
+</head>
+
+<body>
+
+<h1>Availability</h1>
+<div id="day-schedule"></div>
+
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="assets/js/availability.js"></script>
+  <script>
+    (function ($) {
+      var day = $('#day-schedule');
+      day.dayScheduleSelector({
+        days: [0, 1, 2, 3, 4],
+        interval: 60,
+        startTime: '08:00',
+        endTime: '21:00'
+      });
+      day.on('selected.artsy.dayScheduleSelector', function (e, selected) {
+        console.log(selected);
+      });
+      day.data('artsy.dayScheduleSelector').deserialize({
+        /*'0': [['09:30', '11:00'], ['13:00', '16:30']]*/
+      });
+    })($);
+  </script>
+
+</body>
+</html>

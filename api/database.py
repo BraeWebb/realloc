@@ -6,11 +6,11 @@ USER = None
 PASSWORD = None
 DATABASE = None
 try:
-    import config
-    HOST = config.host
-    USER = config.user
-    PASSWORD = config.password
-    DATABASE = config.database
+    import api.config
+    HOST = api.config.host
+    USER = api.config.user
+    PASSWORD = api.config.password
+    DATABASE = api.config.database
 except ImportError:
     pass
 
@@ -105,10 +105,6 @@ class Database:
     def __bool__(self):
         """Return true if the database has an open connection, false otherwise"""
         return not bool(self.db.closed)
-
-    def __del__(self):
-        """Closes all connections to the database when the object is deleted"""
-        self.close()
 
 
 def create_database(database):
