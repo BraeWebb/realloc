@@ -1,8 +1,6 @@
 from flask import Flask, render_template, jsonify, request, abort
 
-from api.user import User
-from api.course import Course
-from api.session import Session
+from api.model import User, Session, Course
 
 app = Flask(__name__)
 
@@ -14,7 +12,8 @@ def index():
 
 @app.route('/api/user', methods=['GET'])
 def view_users():
-    return jsonify([user.json() for user in User.list_users()])
+    # return jsonify([user.json() for user in User.list_users()])
+    return jsonify([User(1).json()])
 
 
 @app.route('/api/user', methods=['POST'])
