@@ -1,0 +1,50 @@
+{% extends 'landing.html' %}
+
+{% block header %}
+    {% block title %}
+        Signup
+    {% endblock %}
+{% endblock %}
+
+{% block content %}
+<section id="banner">
+    <div class="inner">
+        <div class="flex flex-2">
+            <form>
+                <header>
+                    <h3>Login</h3>
+                </header>
+                <div class="field">
+                    <input name="username" id="username" type="text" placeholder="Username">
+                </div>
+                <div class="field">
+                    <input name="password" id="password" type="password" placeholder="Password">
+                </div>
+                <footer>
+                    <a href="#" class="button">Login</a>
+                </footer>
+            </form>
+            <form>
+                <header>
+                    <h3>Signup</h3>
+                </header>
+                <div class="field">
+                    <input name="username" id="username" type="text" placeholder="Username">
+                </div>
+                <div class="field">
+                    <input name="email" id="email" type="email" placeholder="Email">
+                </div>
+                <div class="field">
+                    <input name="password" id="password" type="password" placeholder="Password">
+                </div>
+                <div class="field">
+                    <input name="password2" id="password2" type="password" placeholder="Confirm Password">
+                </div>
+                <footer>
+                    <a href="#" class="button">Signup</a>
+                </footer>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -30,6 +30,11 @@ def times():
     return render_template("times.html")
 
 
+@app.route('/signup')
+def signup():
+    return render_template('signup.html')
+
+
 @app.route('/api/user', methods=['GET'])
 def view_users():
     return jsonify([user.json() for user in User.list_users()])
