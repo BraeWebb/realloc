@@ -6,11 +6,11 @@ USER = None
 PASSWORD = None
 DATABASE = None
 try:
-    import config
-    HOST = config.host
-    USER = config.user
-    PASSWORD = config.password
-    DATABASE = config.database
+    import api.config
+    HOST = api.config.host
+    USER = api.config.user
+    PASSWORD = api.config.password
+    DATABASE = api.config.database
 except ImportError:
     pass
 
