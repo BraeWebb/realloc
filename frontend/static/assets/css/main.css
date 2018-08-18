@@ -1999,11 +1999,28 @@
 		-webkit-appearance: none;
 		-ms-appearance: none;
 		appearance: none;
-		background: var(--main-colour);
+		background: white;
 		border-radius: 10px;
 		border: none;
 		border: solid 2px var(--pale-colour);
-		color: #fff;
+		color: #777;
+		display: block;
+		outline: 0;
+		padding: 0 1em;
+		text-decoration: none;
+		width: 100%;
+	}
+
+	select option:disabled {
+		-moz-appearance: none;
+		-webkit-appearance: none;
+		-ms-appearance: none;
+		appearance: none;
+		background: white;
+		border-radius: 10px;
+		border: none;
+		border: solid 2px var(--pale-colour);
+		color: var(--pale-colour);
 		display: block;
 		outline: 0;
 		padding: 0 1em;
