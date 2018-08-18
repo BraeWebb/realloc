@@ -10,6 +10,21 @@ def index():
     return render_template("index.html")
 
 
+@app.route('/coordinator')
+def coordinator():
+    return render_template("coordinator.html")
+
+
+@app.route('/availability')
+def availability():
+    return render_template("availability.html")
+
+
+@app.route('/times')
+def times():
+    return render_template("times.html")
+
+
 @app.route('/api/user', methods=['GET'])
 def view_users():
     return jsonify([user.json() for user in User.list_users()])
