@@ -106,10 +106,6 @@ class Database:
         """Return true if the database has an open connection, false otherwise"""
         return not bool(self.db.closed)
 
-    def __del__(self):
-        """Closes all connections to the database when the object is deleted"""
-        self.close()
-
 
 def create_database(database):
     """Create a new database with a given database name."""
