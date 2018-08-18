@@ -59,6 +59,11 @@ class User:
 
             return result
 
+    def add_availability(self, day, start, end):
+        with Database() as db:
+            sql = 'INSERT INTO "availability" (user_id, "day", start, "end") VALUES (%s, %s, %s, %s)'
+            db.query(sql, self.id, day, start, end)
+
     def get_allocations(self, revision, course):
         with Database() as db:
             sql = 'SELECT "session_id" FROM allocation WHERE user_id = %s AND revision = %s AND course_id = %s'
