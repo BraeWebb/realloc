@@ -32,7 +32,7 @@ def create_session(row):
     :type row: list<str>
     :return: Session instance representation of CSV data
     """
-    sid = int(row[0])
+    sid = row[0]
     day = row[1]
     start_time = row[2]
     end_time = row[3]
@@ -49,4 +49,4 @@ class Session:
 
 
 if __name__ == "__main__":
-    read_timetable_sheet("C:\\Users\\liamd\\Documents\\timetable-template.csv")
+    pass
