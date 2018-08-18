@@ -4,6 +4,7 @@ from api.database import *
 DATABASE_TABLES = ("user", "course", "session", "availability")
 DATABASE_RELATIONS = ("allocation", "course_association")
 
+
 def create_tables(connection):
     # create user table
     connection.query("""CREATE TABLE user (

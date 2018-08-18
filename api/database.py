@@ -104,7 +104,7 @@ def create_database(database):
     with Database(database="postgres") as connection:
         # set isolation level (dunno why tbqh)
         connection.db.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
-        connection.query(f"CREATE DATABASE {database}")
+        connection.query("CREATE DATABASE " + database)
 
 
 def tables_exist(connection, tables):
