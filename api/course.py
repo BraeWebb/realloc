@@ -2,7 +2,7 @@ import uuid
 
 from api.database import Database
 
-from api.user import User
+#from api.user import User
 
 class Course:
     def __init__(self, id):
@@ -25,12 +25,8 @@ class Course:
 
         return Course(id)
 
-    def get_users(self):
-        with Database() as db:
-            sql = 'SELECT user_id FROM course_association WHERE course_id = %s'
-            result = db.query(sql, self.id)
-
-            return [User(row[0]) for row in result]
+    def json(self):
+        return {"id": self.id, "name": self.name}
 
     def get_allocation(self, revision):
         with Database() as db:
