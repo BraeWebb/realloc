@@ -25,6 +25,14 @@ class Course:
 
         return Course(id)
 
+    @staticmethod
+    def list_courses():
+        with Database() as db:
+            sql = 'SELECT id FROM "course"'
+            result = db.query(sql)
+
+            return [Course(row[0]) for row in result]
+
     def json(self):
         return {"id": self.id, "name": self.name}
 
