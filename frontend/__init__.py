@@ -40,6 +40,26 @@ def update_user(user):
     return jsonify(**user.json())
 
 
+@app.route('/api/user/<user>/availability', methods=['GET'])
+def add_availability(user):
+    try:
+        user = User(user)
+    except KeyError:
+        abort(404)
+    return jsonify(**user.get_availability())
+
+
+@app.route('/api/user/<user>/availability', methods=['POST'])
+def add_availability(user):
+    try:
+        user = User(user)
+    except KeyError:
+        abort(404)
+    user.add_availability(request.form.get("day"), request.form.get("start"),
+                          request.form.get("end"))
+    return jsonify(**user.json())
+
+
 @app.route('/api/user/<user>/courses', methods=['GET'])
 def view_user_courses(user):
     try:
