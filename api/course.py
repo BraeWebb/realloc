@@ -2,7 +2,9 @@ import uuid
 
 from api.database import Database
 
-#from api.user import User
+from api.user import User
+from api.session import Session
+
 
 class Course:
     def __init__(self, id):
@@ -48,8 +50,11 @@ class Course:
             sql = 'SELECT user_id FROM course_association WHERE course_id = %s'
             result = db.query(sql, self.id)
 
-            return [Course(row[0]) for row in result]
+            return [User(row[0]) for row in result]
 
     def get_sessions(self):
         with Database() as db:
-            pass
+            sql = 'SELECT id FROM session WHERE course_id = %s'
+            result = db.query(sql, self.id)
+
+            return [Session(row[0]) for row in result]
