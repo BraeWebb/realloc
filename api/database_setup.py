@@ -8,18 +8,18 @@ DATABASE_RELATIONS = ("allocation", "course_association")
 def create_tables(connection):
     # create user table
     connection.query("""CREATE TABLE "user" (
-                        id integer NOT NULL PRIMARY KEY,
+                        id integer NOT NULL,
                         email text NOT NULL,
                         password text NOT NULL,
                         permission integer NOT NULL);""")
     # create course table
     connection.query("""CREATE TABLE course (
-                        id integer NOT NULL PRIMARY KEY,
+                        id integer NOT NULL,
                         name text NOT NULL);""")
     # create session table
     connection.query("""CREATE TABLE "session" (
-                        id integer NOT NULL PRIMARY KEY,
-                        course_id integer NOT NULL PRIMARY KEY,
+                        id integer NOT NULL,
+                        course_id integer NOT NULL,
                         start time NOT NULL,
                         "end" time NOT NULL,
                         "day" date NOT NULL,
@@ -34,14 +34,14 @@ def create_tables(connection):
 
 def create_relations(connection):
     connection.query("""CREATE TABLE allocation (
-                        user_id integer NOT NULL PRIMARY KEY,
-                        course_id integer NOT NULL PRIMARY KEY,
-                        session_id integer NOT NULL PRIMARY KEY,
-                        revision integer NOT NULL PRIMARY KEY);""")
+                        user_id integer NOT NULL,
+                        course_id integer NOT NULL,
+                        session_id integer NOT NULL,
+                        revision integer NOT NULL);""")
 
     connection.query("""CREATE TABLE course_association (
-                        user_id integer NOT NULL PRIMARY KEY,
-                        course_id integer NOT NULL PRIMARY KEY);""")
+                        user_id integer NOT NULL,
+                        course_id integer NOT NULL);""")
 
 
 if __name__ == "__main__":
