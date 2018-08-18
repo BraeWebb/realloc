@@ -11,13 +11,13 @@ TEST_DATABASE = "test_database"
 
 
 class TestDatabase(unittest.TestCase):
-    def setup_method(self):
+    def setup_method(self, test_method):
         """Create/Wipe a table called test_data where tests will be run"""
         self.connection = Database(database=TEST_DATABASE)
         self.connection.query('DROP TABLE IF EXISTS test_data')
         self.connection.query('CREATE TABLE test_data (variable INTEGER)')
 
-    def teardown_method(self):
+    def teardown_method(self, test_method):
         """Drop the test_data table used to perform tests"""
         self.connection.query('DROP TABLE test_data')
         self.connection.close()

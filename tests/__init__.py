@@ -1,1 +1,1 @@
-__all__ = ["test_sample", "test_database"]
+__all__ = ["test_sample", "dont_test_database.py"]
