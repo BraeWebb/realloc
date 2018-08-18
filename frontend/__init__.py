@@ -1,6 +1,8 @@
 from flask import Flask, render_template, jsonify, request, abort
 
-from api.user import User, Course, Session
+from api.user import User
+from api.course import Course
+from api.session import Session
 
 app = Flask(__name__)
 
@@ -93,7 +95,11 @@ def view_course_users(course):
 
 
 def view_course_sessions(course):
-    pass
+    try:
+        course = Course(course)
+    except KeyError:
+        abort(404)
+    return jsonify([session.json() for session in course.get_sessions()])
 
 
 @app.route('/api/user/<course>/allocation/<revision>', methods=['GET'])
