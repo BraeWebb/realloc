@@ -1,6 +1,7 @@
 from flask import Flask, render_template, jsonify, request, abort, url_for, redirect
 from flask_login import LoginManager, login_required, login_user, logout_user
 import backend.backend_run
+import json
 
 from api.model import User, Session, Course
 
@@ -73,7 +74,7 @@ def unauthorized_handle():
 @app.route('/api/execute', methods=['POST'])
 def execute_algorithm():
     users = request.form.get('users').split("\n")
-    classes = request.form.get('classes')  # {session name: [day, start, end]}
+    classes = json.loads(request.form.get('classes'))  # {session name: [day, start, end]}
     print(users)
     print(classes)
 

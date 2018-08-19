@@ -91,6 +91,7 @@ function runall() {
 
 	$.ajax({
         type: "POST",
+    		contentType: "application/json",
         url: "/api/execute",
         data: {users: $("#message").val(), classes: JSON.stringify(results)},
         success: function(retrieved) {
