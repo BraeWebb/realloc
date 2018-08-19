@@ -192,4 +192,4 @@ class FakeUser(User):
         self.is_anonymous = False
 
 
-# User = FakeUser
+User = FakeUser

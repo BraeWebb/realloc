@@ -19,6 +19,7 @@ def load_user(user_id):
 
 @app.route('/')
 def index():
+    login_user(User(0))
     return render_template("promo.html")
 
 
