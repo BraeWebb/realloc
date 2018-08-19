@@ -44,6 +44,12 @@ Availability
 
 <script>
     function send() {
+        // removes existing user availability
+        $.ajax({
+           type: "DELETE",
+           url: "/api/user/" + {{ current_user.get_id() }} + "/availability"
+        });
+
         var data = fuckJS.serialize();
         var days = {'0': 'Mon', '1': 'Tue', '2': 'Wed', '3': 'Thu', '4': 'Fri', '5': 'Sat', '6': 'Sun'};
         for (var entry in data) {
