@@ -6,7 +6,7 @@ from api.database import Database
 
 
 def convert_time(time):
-    return "{}:{1:02d}".format(time.hour, time.minute)
+    return "{0}:{1:02d}".format(time.hour, time.minute)
 
 
 class User:
