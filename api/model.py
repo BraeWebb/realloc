@@ -59,15 +59,15 @@ class User:
 
     def get_availability(self):
         with Database() as db:
-            sql = 'SELECT "day", start, "end" FROM availability WHERE user_id = %s'
+            sql = 'SELECT "day", start, "type" FROM availability WHERE user_id = %s'
             result = db.query(sql, self.id)
 
             return result
 
-    def add_availability(self, day, start, end):
+    def add_availability(self, day, start, type):
         with Database() as db:
-            sql = 'INSERT INTO "availability" (user_id, "day", start, "end") VALUES (%s, %s, %s, %s)'
-            db.query(sql, self.id, day, start, end)
+            sql = 'INSERT INTO "availability" (user_id, "day", start, "type") VALUES (%s, %s, %s, %s)'
+            db.query(sql, self.id, day, start, type)
 
     def get_allocations(self, revision, course):
         with Database() as db:
