@@ -85,8 +85,10 @@ class User:
 
     def add_availability(self, day, start, type):
         with Database() as db:
-            sql = 'INSERT INTO "availability" (user_id, "day", start, "type") VALUES (%s, %s, %s, %s)'
-            db.query(sql, self.id, day, start, type)
+            delete_query = db.query('DELETE FROM "availability" WHERE user_id = %s')
+            db.query(delete_query, self.id)
+            insert_query = 'INSERT INTO "availability" (user_id, "day", start, "type") VALUES (%s, %s, %s, %s)'
+            db.query(insert_query, self.id, day, start, type)
 
     def get_allocations(self, revision, course):
         with Database() as db:
