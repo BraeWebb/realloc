@@ -9,8 +9,8 @@ Output format:
     [{person name: [session name, ...]}, ...]
 """
 
-from algo import Allocator
-from structs import Person, Session
+from backend.algo import Allocator
+from backend.structs import Person, Session
 from pprint import pprint
 import sys
 import random

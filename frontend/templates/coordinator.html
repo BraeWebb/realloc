@@ -27,24 +27,25 @@
         </div>
 
         <div id="allocform">
+            <div class="class-box">
             <div class="field quater first">
                 <label for="name">Class Name</label>
                 <input name="name" id="name" type="text" placeholder="Class">
             </div>
             <div class="field quater first">
                 <label for="email">Weekday</label>
-                <select>
+                <select name="day" id="day">
                     <option selected disabled>Weekday</option>
-                    <option value="mon">Monday</option>
-                    <option value="tue">Tuesday</option>
-                    <option value="wed">Wednesday</option>
-                    <option value="thu">Thursday</option>
-                    <option value="fri">Friday</option>
+                    <option value="mon">Mon</option>
+                    <option value="tue">Tue</option>
+                    <option value="wed">Wed</option>
+                    <option value="thu">Thu</option>
+                    <option value="fri">Fri</option>
                 </select>
             </div>
             <div class="field quater first">
                 <label for="email">Start Time</label>
-                <select>
+                <select name="start" id="start">
                     <option selected disabled>Start</option>
                     <option value="mon">8:00</option>
                     <option value="tue">9:00</option>
@@ -63,7 +64,7 @@
             </div>
             <div class="field quater">
                 <label for="message">End Time</label>
-                <select>
+                <select name="end" id="end">
                     <option selected disabled>End</option>
                     <option value="mon">8:00</option>
                     <option value="tue">9:00</option>
@@ -81,10 +82,11 @@
                 </select>
             </div>
         </div>
-        <div align="right">
-            <input value="Add class" id="addrow" class="button" type="submit">
         </div>
-        <center><input value="Submit" class="button big" type="submit"></center>
+        <div align="right">
+            <input value="Add class" id="addrow" class="button" type="button">
+        </div>
+        <center><input value="Submit" id="runall" class="button big" type="button"></center>
     </form>
 
 </div>
@@ -94,6 +96,10 @@
 <script src="/static/assets/js/skel.min.js"></script>
 <script src="/static/assets/js/util.js"></script>
 <script src="/static/assets/js/main.js"></script>
-    <script src="/static/assets/js/frm.js"></script>
+<script src="/static/assets/js/frm.js"></script>
+
+<script>
+
+</script>
 
 {% endblock %}

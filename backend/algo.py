@@ -1,5 +1,5 @@
 from typing import List
-from structs import *
+from backend.structs import *
 import random
 import munkres
 import sys

@@ -1,5 +1,6 @@
 from flask import Flask, render_template, jsonify, request, abort, url_for, redirect
 from flask_login import LoginManager, login_required, login_user, logout_user
+from backend.backend_run import run
 
 from api.model import User, Session, Course
 
@@ -67,6 +68,14 @@ def logout():
 @login_manager.unauthorized_handler
 def unauthorized_handle():
     return render_template('unauthorized.html')
+
+
+@app.route('/api/execute', methods=['POST'])
+def execute_algorithm():
+    users = request.form.get('users').split("\n")
+    #pull users from DB
+
+    classes = request.form.get('classes')  # {session name: [day, start, end]}
 
 
 @app.route('/api/login', methods=['POST'])
