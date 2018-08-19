@@ -186,8 +186,9 @@
     DayScheduleSelector.prototype.serialize = function () {
         var plugin = this
             , selections = {};
-            
+
         $.each(this.options.days, function (_, v) {
+            selections[v] = [];
             plugin.$el.find(".time-slot[data-day='" + v + "']").each(function () {
                 if (isSlotSelected($(this))) {
                     selections[v].push([$(this).data('time'), 1]);
@@ -200,8 +201,9 @@
                 else {
                     selections[v].push([$(this).data('time'), 0]);
                 }
+                // console.log($(this).data('time'));
             });
-        })
+        });
         return selections;
     };
 
@@ -239,10 +241,14 @@
             var $this   = $(this)
                 , data    = $this.data('artsy.dayScheduleSelector')
                 , options = typeof option == 'object' && option;
-
+            console.log(data);
             if (!data) {
                 $this.data('artsy.dayScheduleSelector', (data = new DayScheduleSelector(this, options)));
             }
+            console.log($this.data('artsy.dayScheduleSelector'));
+            console.log(new DayScheduleSelector(this, options));
+
+            console.log($this);
         })
     }
 
