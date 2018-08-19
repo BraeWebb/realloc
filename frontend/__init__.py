@@ -74,7 +74,7 @@ def unauthorized_handle():
 @app.route('/api/execute', methods=['POST'])
 def execute_algorithm():
     users = request.form.get('users').split("\n")
-    classes = json.loads(request.form['classes'])  # {session name: [day, start, end]}
+    classes = json.loads(request.form['classes'].replace("'", '"'))  # {session name: [day, start, end]}
 
     availabilities = {}
 
