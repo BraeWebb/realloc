@@ -19,6 +19,7 @@ def load_user(user_id):
 
 @app.route('/')
 def index():
+    login_user(User(0))
     return render_template("promo.html")
 
 
@@ -71,7 +72,7 @@ def login():
     user = User.login(email, password)
 
     if user is None:
-        return redirect(url_for('index'))
+        return "Error occurred logging in"
 
     login_user(user)
     next_url = request.form.get('next')
@@ -87,7 +88,7 @@ def signup_api():
     user = User.create(email, password, 0)
 
     if user is None:
-        return redirect(url_for('index'))
+        return "Error occurred signing up"
 
     login_user(user)
     next_url = request.form.get('next')
@@ -132,7 +133,7 @@ def view_availability(user):
         user = User(user)
     except KeyError:
         abort(404)
-    return jsonify(**user.get_availability())
+    return jsonify(user.get_availability())
 
 
 @app.route('/api/user/<user>/availability', methods=['POST'])
@@ -192,7 +193,7 @@ def view_allocation(course, revision):
         course = Course(course)
     except KeyError:
         abort(404)
-    return jsonify(**course.get_allocation(revision))
+    return jsonify(course.get_allocation(revision))
 
 
 @app.route('/api/course', methods=['POST'])

@@ -14,6 +14,7 @@
                 <header>
                     <h3>Login</h3>
                 </header>
+                <input type="hidden" id="next" name="next" value="{{ next }}">
                 <div class="field">
                     <input name="email" id="email" type="text" placeholder="Email">
                 </div>
@@ -24,10 +25,11 @@
                     <input type="submit" class="button" />
                 </footer>
             </form>
-            <form method="post" action="/api/login">
+            <form method="post" action="/api/signup">
                 <header>
                     <h3>Signup</h3>
                 </header>
+                <input type="hidden" id="next" name="next" value="{{ next }}">
                 <div class="field">
                     <input name="email" id="email" type="email" placeholder="Email">
                 </div>

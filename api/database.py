@@ -95,9 +95,9 @@ class Database:
         wheres = ' AND '.join([str(attr) + '=\'' + str(val) + '\'' for attr, val in where.items()])
 
         if where:
-            query = 'SELECT COUNT(*) FROM {} WHERE {}'.format(table, wheres)
+            query = 'SELECT COUNT(*) FROM "{}" WHERE {}'.format(table, wheres)
         else:
-            query = 'SELECT COUNT(*) FROM {}'.format(table, wheres)
+            query = 'SELECT COUNT(*) FROM "{}"'.format(table, wheres)
         self.cursor.execute(query)
 
         return bool(self.cursor.fetchone()[0])

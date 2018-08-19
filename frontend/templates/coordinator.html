@@ -25,7 +25,66 @@
             <label for="message">Enter tutor emails (one line at a time)</label>
             <textarea name="message" id="message" rows="6" placeholder="Tutors"></textarea>
         </div>
-            <center><a href="/times" class="button">New Allocation</a></center>
+
+        <div id="allocform">
+            <div class="field quater first">
+                <label for="name">Class Name</label>
+                <input name="name" id="name" type="text" placeholder="Class">
+            </div>
+            <div class="field quater first">
+                <label for="email">Weekday</label>
+                <select>
+                    <option selected disabled>Weekday</option>
+                    <option value="mon">Monday</option>
+                    <option value="tue">Tuesday</option>
+                    <option value="wed">Wednesday</option>
+                    <option value="thu">Thursday</option>
+                    <option value="fri">Friday</option>
+                </select>
+            </div>
+            <div class="field quater first">
+                <label for="email">Start Time</label>
+                <select>
+                    <option selected disabled>Start</option>
+                    <option value="mon">8:00</option>
+                    <option value="tue">9:00</option>
+                    <option value="wed">10:00</option>
+                    <option value="thu">11:00</option>
+                    <option value="fri">12:00</option>
+                    <option value="fri">13:00</option>
+                    <option value="fri">14:00</option>
+                    <option value="fri">15:00</option>
+                    <option value="fri">16:00</option>
+                    <option value="fri">17:00</option>
+                    <option value="fri">18:00</option>
+                    <option value="fri">19:00</option>
+                    <option value="fri">20:00</option>
+                </select>
+            </div>
+            <div class="field quater">
+                <label for="message">End Time</label>
+                <select>
+                    <option selected disabled>End</option>
+                    <option value="mon">8:00</option>
+                    <option value="tue">9:00</option>
+                    <option value="wed">10:00</option>
+                    <option value="thu">11:00</option>
+                    <option value="fri">12:00</option>
+                    <option value="fri">13:00</option>
+                    <option value="fri">14:00</option>
+                    <option value="fri">15:00</option>
+                    <option value="fri">16:00</option>
+                    <option value="fri">17:00</option>
+                    <option value="fri">18:00</option>
+                    <option value="fri">19:00</option>
+                    <option value="fri">20:00</option>
+                </select>
+            </div>
+        </div>
+        <div align="right">
+            <input value="Add class" id="addrow" class="button" type="submit">
+        </div>
+        <center><input value="Submit" class="button big" type="submit"></center>
     </form>
 
 </div>
@@ -35,5 +94,6 @@
 <script src="/static/assets/js/skel.min.js"></script>
 <script src="/static/assets/js/util.js"></script>
 <script src="/static/assets/js/main.js"></script>
+    <script src="/static/assets/js/frm.js"></script>
 
 {% endblock %}
