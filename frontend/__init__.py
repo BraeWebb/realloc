@@ -72,8 +72,8 @@ def unauthorized_handle():
 
 @app.route('/api/execute', methods=['POST'])
 def execute_algorithm():
-    users = request.form.get('users').split("\n")
-    classes = request.form.get('classes')  # {session name: [day, start, end]}
+    users = request.form['users'].split("\n")
+    classes = request.form['classes']  # {session name: [day, start, end]}
     print(users)
     print(classes)
 
