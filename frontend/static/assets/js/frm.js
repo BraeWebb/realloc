@@ -125,6 +125,8 @@ function runall() {
 						//form.submit();*/
         }
     });
+
+	return false;
 }
 
 document.onready = function() {
