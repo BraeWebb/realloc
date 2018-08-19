@@ -31,7 +31,7 @@ Availability
             url: "/api/user/" + {{ current_user.get_id() }} + "/availability",
             success: function(retrieved) {
                 console.log(retrieved);
-                day.data('artsy.dayScheduleSelector').deserialize(retrieved);
+                fuckJS.data('artsy.dayScheduleSelector').deserialize(retrieved);
             }
         });
     })($);
