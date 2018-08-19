@@ -178,7 +178,10 @@ class Session:
         return Session(id, course)
 
     def json(self):
-        return self.__dict__
+        return {"id": self.id, "course": self.course,
+                "start": "{}:{}".format(self.start.hour, self.start.minute),
+                "end": "{}:{}".format(self.start.hour, self.start.minute),
+                "day": self.day, "location": self.location}
 
 
 # TODO: Plz remove
