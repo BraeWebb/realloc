@@ -83,9 +83,9 @@ def execute_algorithm():
     for user in users:
         user = User.by_email(user)
         avail = user.get_availability()
-        availabilities[user.email] = {}
+        availabilities[user.email] = {"Mon": [], "Tue": [], "Wed": [], "Thu": [], "Fri": []}
         for day, start, type in avail:
-            availabilities[user.email][day] = [start, type]
+            availabilities[user.email][day].append([start, type])
         # {user: [[day, start, type]]}
     print(availabilities)
 
