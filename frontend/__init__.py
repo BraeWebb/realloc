@@ -81,7 +81,7 @@ def add_availability(user):
     except KeyError:
         abort(404)
     user.add_availability(request.form.get("day"), request.form.get("start"),
-                          request.form.get("end"))
+                          request.form.get("type"))
     return jsonify(**user.json())
 
 
