@@ -92,7 +92,7 @@ function runall() {
 	$.ajax({
         type: "POST",
         url: "/api/execute",
-        data: {'users': $("#message").val(), 'classes': results},
+        data: {users: $("#message").val(), classes: JSON.stringify(results)},
         success: function(retrieved) {
             console.log(retrieved);
         }
