@@ -44,31 +44,19 @@ Availability
 
 <script>
     function send() {
-        /*var id = 42;
-        var data = $('#day-schedule').data('artsy.dayScheduleSelector').serialize();
-        var days = {'0': 'Mon', '1': 'Tue', '2': 'Wed', '3': 'Thu', '4': 'Fri', '5': 'Sat', '6': 'Sun'};
-        for (var entry in data) {
-            var day = days[entry];
-            for (var period in data[entry]) {
-                var start = period[0];
-                var end = period[1];
-                console.log(day);
-                console.log(start);
-                console.log(end);
-                $.ajax({
-                    type: "POST",
-                    url: "/api/user/" + id + "/availability",
-                    data: {day: day, start: start, end: end}
-                });
-            }
-        }*/
-        var data = fuckJS.serialize();
+        // removes existing user availability
+        $.ajax({
+           type: "DELETE",
+           url: "/api/user/" + {{ current_user.get_id() }} + "/availability"
+        });
 
+        var data = fuckJS.serialize();
         var days = {'0': 'Mon', '1': 'Tue', '2': 'Wed', '3': 'Thu', '4': 'Fri', '5': 'Sat', '6': 'Sun'};
         for (var entry in data) {
             var day = days[entry];
             for (var p in data[entry]) {
                 var period = data[entry][p];
+                console.log(period);
                 var time = period[0];
                 var type = period[1];
                 console.log("period" + period);
