@@ -132,7 +132,7 @@ def view_availability(user):
         user = User(user)
     except KeyError:
         abort(404)
-    return jsonify(**user.get_availability())
+    return jsonify(user.get_availability())
 
 
 @app.route('/api/user/<user>/availability', methods=['POST'])
@@ -192,7 +192,7 @@ def view_allocation(course, revision):
         course = Course(course)
     except KeyError:
         abort(404)
-    return jsonify(**course.get_allocation(revision))
+    return jsonify(course.get_allocation(revision))
 
 
 @app.route('/api/course', methods=['POST'])
