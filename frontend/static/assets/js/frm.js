@@ -97,7 +97,7 @@ function runall() {
 
             console.log(JSON.stringify(retrieved));
 
-            var res = "<table style=\"width:100%\"> \
+            var res = "<br><h4>Allocations</h4><table style=\"width:100%\"> \
             			<tr> \
             			<th>Tutor</th> \
             			<th>Session(s)</th> \
