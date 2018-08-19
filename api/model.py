@@ -11,7 +11,7 @@ class User:
         self.permissions = 0
         with Database() as db:
             if db.exists("user", id=self.id):
-                sql = 'SELECT "email", permissions FROM "user" WHERE id = %s'
+                sql = 'SELECT "email", permission FROM "user" WHERE id = %s'
                 self.email, self.permissions = db.query(sql, self.id, limit=1)[0]
             else:
                 raise KeyError('User {} not found'.format(self.id))
@@ -25,7 +25,7 @@ class User:
         with Database() as db:
             id = uuid.uuid4().int
             id = int(str(id)[:18])
-            sql = 'INSERT INTO "user" (id, email, permissions) VALUES (%s, %s, %s)'
+            sql = 'INSERT INTO "user" (id, email, permission) VALUES (%s, %s, %s)'
 
             db.query(sql, id, email, permissions)
 
@@ -33,7 +33,7 @@ class User:
 
     def update(self, email, permissions):
         with Database() as db:
-            sql = 'UPDATE "user" SET (email, permissions) = (%s, %s) where id = %s'
+            sql = 'UPDATE "user" SET (email, permission) = (%s, %s) where id = %s'
             db.query(sql, email, permissions, self.id)
 
     @staticmethod
