@@ -143,7 +143,7 @@ class Course:
 
     def get_sessions(self):
         with Database() as db:
-            sql = 'SELECT id FROM session WHERE course_id = %s'
+            sql = 'SELECT id FROM "session" WHERE course_id = %s'
             result = db.query(sql, self.id)
 
             return [Session(row[0]) for row in result]
