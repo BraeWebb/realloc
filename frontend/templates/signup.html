@@ -10,27 +10,24 @@
 <section id="banner">
     <div class="inner">
         <div class="flex flex-2">
-            <form>
+            <form method="post" action="/api/login">
                 <header>
                     <h3>Login</h3>
                 </header>
                 <div class="field">
-                    <input name="username" id="username" type="text" placeholder="Username">
+                    <input name="email" id="email" type="text" placeholder="Email">
                 </div>
                 <div class="field">
                     <input name="password" id="password" type="password" placeholder="Password">
                 </div>
                 <footer>
-                    <a href="/api/login?next={{ next }}" class="button">Login</a>
+                    <input type="submit" class="button" />
                 </footer>
             </form>
-            <form>
+            <form method="post" action="/api/signup">
                 <header>
                     <h3>Signup</h3>
                 </header>
-                <div class="field">
-                    <input name="username" id="username" type="text" placeholder="Username">
-                </div>
                 <div class="field">
                     <input name="email" id="email" type="email" placeholder="Email">
                 </div>
@@ -41,7 +38,7 @@
                     <input name="password2" id="password2" type="password" placeholder="Confirm Password">
                 </div>
                 <footer>
-                    <a href="#" class="button">Signup</a>
+                    <input type="submit" class="button" />
                 </footer>
             </form>
         </div>

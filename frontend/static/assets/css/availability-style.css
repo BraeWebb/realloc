@@ -43,7 +43,7 @@ body {
     -webkit-text-size-adjust: none;
 }
 
-Box Model
+/*Box Model*/
 
 *, *:before, *:after {
     -moz-box-sizing: border-box;

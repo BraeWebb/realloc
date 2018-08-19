@@ -1,4 +1,5 @@
 import uuid
+import hashlib
 from datetime import datetime
 
 from api.database import Database
@@ -11,7 +12,7 @@ class User:
         self.permissions = 0
         with Database() as db:
             if db.exists("user", id=self.id):
-                sql = 'SELECT "email", permissions FROM "user" WHERE id = %s'
+                sql = 'SELECT "email", permission FROM "user" WHERE id = %s'
                 self.email, self.permissions = db.query(sql, self.id, limit=1)[0]
             else:
                 raise KeyError('User {} not found'.format(self.id))
@@ -21,18 +22,34 @@ class User:
         self.is_anonymous = False
 
     @classmethod
-    def create(cls, email, permissions):
+    def create(cls, email, password, permissions):
         with Database() as db:
-            id = uuid.uuid4().int
-            sql = 'INSERT INTO "user" (id, email, permissions) VALUES (%s, %s, %s)'
+            if db.exists("user", email=email):
+                return None
 
-            db.query(sql, id, email, permissions)
+            id = uuid.uuid4().int
+            id = int(str(id)[:18])
+            sql = 'INSERT INTO "user" (id, email, permission, password) VALUES (%s, %s, %s, %s)'
+
+            db.query(sql, id, email, permissions, password)
 
             return User(id)
 
+    @classmethod
+    def login(cls, email, password):
+        with Database() as db:
+            password = hashlib.sha224(bytes(password, "utf-8")).hexdigest()
+            sql = 'SELECT "id", password FROM "user" WHERE email = %s'
+
+            user_id, db_password = db.query(sql, email)[0]
+            if password == db_password:
+                return User(user_id)
+            return None
+
+
     def update(self, email, permissions):
         with Database() as db:
-            sql = 'UPDATE "user" SET (email, permissions) = (%s, %s) where id = %s'
+            sql = 'UPDATE "user" SET (email, permission) = (%s, %s) where id = %s'
             db.query(sql, email, permissions, self.id)
 
     @staticmethod
@@ -76,6 +93,7 @@ class User:
 
             return [Session(row[0], course) for row in result]
 
+
 class Course:
     def __init__(self, id):
         self.id = id
@@ -83,7 +101,7 @@ class Course:
         with Database() as db:
             if db.exists("course", id=self.id):
                 sql = 'SELECT "name" FROM "course" WHERE id = %s'
-                self.name = db.query(sql, self.id, limit=1)[0]
+                self.name = db.query(sql, self.id, limit=1)[0][0]
             else:
                 raise KeyError('Course {} not found'.format(self.id))
 
@@ -91,6 +109,7 @@ class Course:
     def create(cls, name):
         with Database() as db:
             id = uuid.uuid4().int
+            id = int(str(id)[:18])
             sql = 'INSERT INTO "course" (id, "name") VALUES (%s, %s)'
 
             db.query(sql, id, name)
@@ -124,7 +143,7 @@ class Course:
 
     def get_sessions(self):
         with Database() as db:
-            sql = 'SELECT id FROM session WHERE course_id = %s'
+            sql = 'SELECT id FROM "session" WHERE course_id = %s'
             result = db.query(sql, self.id)
 
             return [Session(row[0]) for row in result]
@@ -149,6 +168,7 @@ class Session:
     def create(cls, course, start, end, day, location):
         with Database() as db:
             id = uuid.uuid4().int
+            id = int(str(id)[:18])
             sql = 'INSERT INTO "session" (id, course, start, "end", "day", location) VALUES (%s, %s, %s, %s, %s, %s)'
 
             db.query(sql, id, course, start, end, day, location)
@@ -170,4 +190,4 @@ class FakeUser(User):
         self.is_anonymous = False
 
 
-User = FakeUser
+# User = FakeUser

@@ -59,14 +59,38 @@ def logout():
 
 
 @login_manager.unauthorized_handler
-def unauthorized():
+def unauthorized_handle():
     return render_template('unauthorized.html')
 
 
-@app.route('/api/login')
+@app.route('/api/login', methods=['POST'])
 def login():
-    login_user(User(0))
-    next_url = request.args.get('next')
+    email = request.form.get('email')
+    password = request.form.get('password')
+
+    user = User.login(email, password)
+
+    if user is None:
+        return redirect(url_for('index'))
+
+    login_user(user)
+    next_url = request.form.get('next')
+
+    return redirect(next_url or url_for('index'))
+
+
+@app.route('/api/signup', methods=['POST'])
+def signup_api():
+    email = request.form.get('email')
+    password = request.form.get('password')
+
+    user = User.create(email, password, 0)
+
+    if user is None:
+        return redirect(url_for('index'))
+
+    login_user(user)
+    next_url = request.form.get('next')
 
     return redirect(next_url or url_for('index'))
 
@@ -78,7 +102,8 @@ def view_users():
 
 @app.route('/api/user', methods=['POST'])
 def create_user():
-    user = User.create(request.form.get('email'), request.form.get('permissions'))
+    user = User.create(request.form.get('email'), request.form.get('password'),
+                       request.form.get('permissions'))
     return jsonify(**user.json()), 201
 
 
