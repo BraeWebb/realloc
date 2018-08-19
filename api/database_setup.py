@@ -24,13 +24,13 @@ def create_tables(connection):
                             course_id bigint NOT NULL,
                             start time NOT NULL,
                             "end" time NOT NULL,
-                            "day" date NOT NULL,
+                            "day" text NOT NULL,
                             location text);""")
     # create availability table
     with Database() as connection:
         connection.query("""CREATE TABLE availability (
                             user_id bigint NOT NULL,
-                            "day" date NOT NULL,
+                            "day" text NOT NULL,
                             start time NOT NULL,
                             "type" integer NOT NULL);""")
 
