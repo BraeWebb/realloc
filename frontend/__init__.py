@@ -1,8 +1,20 @@
-from flask import Flask, render_template, jsonify, request, abort
+from flask import Flask, render_template, jsonify, request, abort, url_for, redirect
+from flask_login import LoginManager, login_required, login_user, logout_user
 
 from api.model import User, Session, Course
 
 app = Flask(__name__)
+app.secret_key = "Real Secure Totally Unbreakable Secret Key"
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    try:
+        return User(user_id)
+    except KeyError:
+        return None
 
 
 @app.route('/')
@@ -11,28 +23,52 @@ def index():
 
 
 @app.route('/dashboard')
+@login_required
 def dashboard():
     return render_template("dashboard.html")
 
 
 @app.route('/coordinator')
+@login_required
 def coordinator():
     return render_template("coordinator.html")
 
 
 @app.route('/availability')
+@login_required
 def availability():
     return render_template("availability.html")
 
 
 @app.route('/times')
+@login_required
 def times():
     return render_template("times.html")
 
 
 @app.route('/signup')
 def signup():
-    return render_template('signup.html')
+    next_url = request.args.get('next')
+    return render_template('signup.html', next=next_url)
+
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
+
+
+@login_manager.unauthorized_handler
+def unauthorized():
+    return render_template('unauthorized.html')
+
+
+@app.route('/api/login')
+def login():
+    login_user(User(0))
+    next_url = request.args.get('next')
+
+    return redirect(next_url or url_for('index'))
 
 
 @app.route('/api/user', methods=['GET'])
@@ -81,7 +117,7 @@ def add_availability(user):
     except KeyError:
         abort(404)
     user.add_availability(request.form.get("day"), request.form.get("start"),
-                          request.form.get("end"))
+                          request.form.get("type"))
     return jsonify(**user.json())
 
 

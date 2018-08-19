@@ -12,7 +12,7 @@
     DayScheduleSelector.DEFAULTS = {
         days        : [0, 1, 2, 3, 4, 5, 6],  // Mon - Sun
         startTime   : '08:00',                // HH:mm format
-        endTime     : '21:00',                // HH:mm format
+        endTime     : '20:00',                // HH:mm format
         interval    : 60,                     // minutes
         stringDays  : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
         template    : '<div class="day-schedule-selector">'         +
@@ -75,9 +75,11 @@
     }
 
     DayScheduleSelector.prototype.select = function ($slot) { $slot.attr('data-selected', 'selected'); }
-    DayScheduleSelector.prototype.deselect = function ($slot) { $slot.removeAttr('data-selected'); }
+    DayScheduleSelector.prototype.select_alt = function ($slot) { $slot.attr('data-selected-alt', 'selected'); $slot.removeAttr('data-selected'); }
+    DayScheduleSelector.prototype.deselect = function ($slot) { $slot.removeAttr('data-selected'); $slot.removeAttr('data-selected-alt'); }
 
     function isSlotSelected($slot) { return $slot.is('[data-selected]'); }
+    function isSlotSelectedAlt($slot) { return $slot.is('[data-selected-alt]')}
     function isSlotSelecting($slot) { return $slot.is('[data-selecting]'); }
 
     /**
@@ -103,7 +105,8 @@
         this.$el.on('click', '.time-slot', function () {
             var day = $(this).data('day');
             if (!plugin.isSelecting()) {  // if we are not in selecting mode
-                if (isSlotSelected($(this))) { plugin.deselect($(this)); }
+                if (isSlotSelectedAlt($(this))) { plugin.deselect($(this)); }
+                else if (isSlotSelected($(this))) { plugin.select_alt($(this)); }
                 else {  // then start selecting
                     plugin.$selectingStart = $(this);
                     $(this).attr('data-selecting', 'selecting');
@@ -150,7 +153,7 @@
    *      6: []
    *    }
      */
-    DayScheduleSelector.prototype.serialize = function () {
+    /* DayScheduleSelector.prototype.serialize = function () {
         var plugin = this
             , selections = {};
 
@@ -178,6 +181,28 @@
             });
         })
         return selections;
+    };*/
+
+    DayScheduleSelector.prototype.serialize = function () {
+        var plugin = this
+            , selections = {};
+            
+        $.each(this.options.days, function (_, v) {
+            plugin.$el.find(".time-slot[data-day='" + v + "']").each(function () {
+                if (isSlotSelected($(this))) {
+                    selections[v].push([$(this).data('time'), 1]);
+                }
+
+                else if (isSlotSelectedAlt($(this))) {
+                    selections[v].push([$(this).data('time'), 2]);
+                }
+
+                else {
+                    selections[v].push([$(this).data('time'), 0]);
+                }
+            });
+        })
+        return selections;
     };
 
     /**
@@ -199,8 +224,8 @@
             var $slots = plugin.$el.find('.time-slot[data-day="' + d + '"]');
             $.each(ds, function(_, s) {
                 for (i = 0; i < $slots.length; i++) {
-                    if ($slots.eq(i).data('time') >= s[1]) { break; }
-                    if ($slots.eq(i).data('time') >= s[0]) { plugin.select($slots.eq(i)); }
+                    if ($slots.eq(i).data('time') == s[0] && s[1] == 1) { plugin.select($slots.eq(i)); }
+                    if ($slots.eq(i).data('time') == s[0] && s[1] == 2) { plugin.select_alt($slots.eq(i)); }
                 }
             })
         });

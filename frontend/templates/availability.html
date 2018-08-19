@@ -18,7 +18,7 @@
         days: [0, 1, 2, 3, 4],
         interval: 60,
         startTime: '08:00',
-        endTime: '21:00'
+        endTime: '20:00'
       });
       day.on('selected.artsy.dayScheduleSelector', function (e, selected) {
         console.log(selected);
@@ -35,7 +35,7 @@
 
 <script>
 function send() {
-    var id = 42;
+    /*var id = 42;
     var data = $('#day-schedule').data('artsy.dayScheduleSelector').serialize();
     var days = {'0': 'Mon', '1': 'Tue', '2': 'Wed', '3': 'Thu', '4': 'Fri', '5': 'Sat', '6': 'Sun'};
     for (var entry in data) {
@@ -43,10 +43,28 @@ function send() {
         for (var period in data[entry]) {
             var start = period[0];
             var end = period[1];
+            console.log(day);
+            console.log(start);
+            console.log(end);
             $.ajax({
                 type: "POST",
                 url: "/api/user/" + id + "/availability",
                 data: {day: day, start: start, end: end}
+            });
+        }
+    }*/
+    var id = 42;
+    var data = $('#day-schedule').data('artsy.dayScheduleSelector').serialize();
+    var days = {'0': 'Mon', '1': 'Tue', '2': 'Wed', '3': 'Thu', '4': 'Fri', '5': 'Sat', '6': 'Sun'};
+    for (var entry in data) {
+        var day = days[entry];
+        for (var period in data[entry]) {
+            var time = period[0];
+            var type = period[1];
+            $.ajax({
+                type: "POST",
+                url: "/api/user/" + id + "/availability",
+                data: {day: day, start: time, type: type}
             });
         }
     }

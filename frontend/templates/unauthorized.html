@@ -1,0 +1,32 @@
+{% extends 'landing.html' %}
+
+{% block header %}
+    {% block title %}
+        Unauthorized
+    {% endblock %}
+{% endblock %}
+
+{% block content %}
+
+<section id="banner">
+    <div class="inner">
+        <header>
+            <h1>Unauthorized</h1>
+        </header>
+
+        <div class="flex">
+
+            <div>
+                <h3>Sorry,</h3>
+                <p>We can't let you access that, please login or signup
+                </p>
+                <br>
+                <a href="/signup?next={{ request.path }}" class="button">Login/Signup</a>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

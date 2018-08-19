@@ -16,10 +16,14 @@ class User:
             else:
                 raise KeyError('User {} not found'.format(self.id))
 
+        self.is_authenticated = True
+        self.is_active = True
+        self.is_anonymous = False
+
     @classmethod
     def create(cls, email, permissions):
         with Database() as db:
-            id = uuid.uuid4()
+            id = uuid.uuid4().int
             sql = 'INSERT INTO "user" (id, email, permissions) VALUES (%s, %s, %s)'
 
             db.query(sql, id, email, permissions)
@@ -43,6 +47,9 @@ class User:
         return {"id": self.id, "email": self.email,
                 "permissions": self.permissions}
 
+    def get_id(self):
+        return self.id
+
     def get_courses(self):
         with Database() as db:
             sql = 'SELECT course_id FROM course_association WHERE user_id = %s'
@@ -52,15 +59,15 @@ class User:
 
     def get_availability(self):
         with Database() as db:
-            sql = 'SELECT "day", start, "end" FROM availability WHERE user_id = %s'
+            sql = 'SELECT "day", start, "type" FROM availability WHERE user_id = %s'
             result = db.query(sql, self.id)
 
             return result
 
-    def add_availability(self, day, start, end):
+    def add_availability(self, day, start, type):
         with Database() as db:
-            sql = 'INSERT INTO "availability" (user_id, "day", start, "end") VALUES (%s, %s, %s, %s)'
-            db.query(sql, self.id, day, start, end)
+            sql = 'INSERT INTO "availability" (user_id, "day", start, "type") VALUES (%s, %s, %s, %s)'
+            db.query(sql, self.id, day, start, type)
 
     def get_allocations(self, revision, course):
         with Database() as db:
@@ -83,7 +90,7 @@ class Course:
     @classmethod
     def create(cls, name):
         with Database() as db:
-            id = uuid.uuid4()
+            id = uuid.uuid4().int
             sql = 'INSERT INTO "course" (id, "name") VALUES (%s, %s)'
 
             db.query(sql, id, name)
@@ -141,7 +148,7 @@ class Session:
     @classmethod
     def create(cls, course, start, end, day, location):
         with Database() as db:
-            id = uuid.uuid4()
+            id = uuid.uuid4().int
             sql = 'INSERT INTO "session" (id, course, start, "end", "day", location) VALUES (%s, %s, %s, %s, %s, %s)'
 
             db.query(sql, id, course, start, end, day, location)
@@ -150,3 +157,17 @@ class Session:
 
     def json(self):
         return self.__dict__
+
+
+# TODO: Plz remove
+class FakeUser(User):
+    def __init__(self, id):
+        self.id = id
+        self.email = "test@example.com"
+        self.permissions = 0
+        self.is_authenticated = True
+        self.is_active = True
+        self.is_anonymous = False
+
+
+User = FakeUser
