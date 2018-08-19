@@ -21,15 +21,16 @@
 <body>
 
 <!-- Header -->
-<header id="header">
-    <div class="inner">
-        <a href="/" class="logo"><strong>realloc</strong> by BLEH</a>
-        <nav id="nav">
-            <a href="/static/generic.html">New Allocation</a>
-            <a href="/static/elements.html">Tutor Portal</a>
-        </nav>
-        <a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
-    </div>
+<header id="">
+        <div class="navigation-bar">
+                <div id="navigation-container">
+                    <ul>
+                    <li><a href={{ url_for('index') }}>Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href={{ url_for('signup') }}>Login/Signup</a></li>
+                  </ul>
+                </div>
 </header>
 
 <!-- Content -->
