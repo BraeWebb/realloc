@@ -16,6 +16,10 @@ class User:
             else:
                 raise KeyError('User {} not found'.format(self.id))
 
+        self.is_authenticated = True
+        self.is_active = True
+        self.is_anonymous = False
+
     @classmethod
     def create(cls, email, permissions):
         with Database() as db:
@@ -42,6 +46,9 @@ class User:
     def json(self):
         return {"id": self.id, "email": self.email,
                 "permissions": self.permissions}
+
+    def get_id(self):
+        return self.id
 
     def get_courses(self):
         with Database() as db:
@@ -150,3 +157,17 @@ class Session:
 
     def json(self):
         return self.__dict__
+
+
+# TODO: Plz remove
+class FakeUser(User):
+    def __init__(self, id):
+        self.id = id
+        self.email = "test@example.com"
+        self.permissions = 0
+        self.is_authenticated = True
+        self.is_active = True
+        self.is_anonymous = False
+
+
+User = FakeUser

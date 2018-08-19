@@ -48,6 +48,9 @@
               <p>Availability</p>
             </a>
           </li>
+          <li class="bottom">
+            <p>{{ current_user.email }} | <a href="{{ url_for('logout') }}">Logout</a></p>
+          </li>
         </ul>
       </div>
     </div>
