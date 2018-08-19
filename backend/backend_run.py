@@ -105,6 +105,7 @@ def run(people_input, session_input):
     output = []
     for person in alloc:
         output.append({"email": person, "allocations": ", ".join(alloc[person])})
+    return output  # [{email: email, allocations: allocations}, ...]
 
 
 def is_avail(session_time, person_details):
