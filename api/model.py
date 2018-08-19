@@ -33,7 +33,7 @@ class User:
 
             db.query(sql, id, email, permissions, password)
 
-            return User(id)
+        return User(id)
 
     @classmethod
     def login(cls, email, password):
@@ -42,9 +42,9 @@ class User:
             sql = 'SELECT "id", password FROM "user" WHERE email = %s'
 
             user_id, db_password = db.query(sql, email)[0]
-            if password == db_password:
-                return User(user_id)
-            return None
+        if password == db_password:
+            return User(user_id)
+        return None
 
 
     def update(self, email, permissions):
