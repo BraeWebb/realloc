@@ -201,6 +201,7 @@
                 else {
                     selections[v].push([$(this).data('time'), 0]);
                 }
+                // console.log($(this).data('time'));
             });
         });
         return selections;
