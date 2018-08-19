@@ -102,11 +102,11 @@
             , options = this.options
             , $slots;
 
-        this.$el.on('click', '.time-slot', function () {
+        this.$el.unbind('click').on('click', '.time-slot', function () {
             var day = $(this).data('day');
             if (!plugin.isSelecting()) {  // if we are not in selecting mode
-                if (isSlotSelectedAlt($(this))) { plugin.deselect($(this)); }
-                else if (isSlotSelected($(this))) { plugin.select_alt($(this)); }
+                if (isSlotSelectedAlt($(this))) { plugin.deselect($(this)); console.log('deselect'); }
+                else if (isSlotSelected($(this))) { plugin.select_alt($(this)); console.log('alt'); }
                 else {  // then start selecting
                     plugin.$selectingStart = $(this);
                     $(this).attr('data-selecting', 'selecting');
