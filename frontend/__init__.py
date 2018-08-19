@@ -75,8 +75,6 @@ def unauthorized_handle():
 def execute_algorithm():
     users = request.form.get('users').split("\n")
     classes = json.loads(request.form['classes'])  # {session name: [day, start, end]}
-    print(users)
-    print(classes)
 
     availabilities = {}
 
@@ -84,7 +82,12 @@ def execute_algorithm():
 
     for user in users:
         user = User.by_email(user)
-        availabilities[user.email] = user.get_availability()  # {user: [[day, start, type]]}
+        avail = user.get_availability()
+        availabilities[user.email] = {"Mon": [], "Tue": [], "Wed": [], "Thu": [], "Fri": []}
+        for day, start, type in avail:
+            availabilities[user.email][day].append([start, type])
+        # {user: [[day, start, type]]}
+    print(availabilities)
 
     app.logger.info("Classes 2: {}".format(classes))
     results = backend.backend_run.run(availabilities, classes)
