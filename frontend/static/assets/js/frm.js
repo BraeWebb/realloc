@@ -86,7 +86,7 @@ function runall() {
 		results[inputs[i]] = l;
 	}
 
-	console.log("#message").value
+	console.log($("#message").val())
 	console.log(results);
 
 	$.ajax({
