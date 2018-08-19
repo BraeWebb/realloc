@@ -94,7 +94,14 @@ function runall() {
         url: "/api/execute",
         data: {users: $("#message").val(), classes: JSON.stringify(results)},
         success: function(retrieved) {
+
             console.log(retrieved);
+
+						var form = $('<form action="/allocations" method="post">' +
+							'<input type="hidden" name="tutors" id="tutors" value="' + JSON.stringify(retrieved) + '" />' +
+							'</form>');
+						$('body').append(form);
+						form.submit();
         }
     });
 }
