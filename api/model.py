@@ -24,6 +24,7 @@ class User:
     def create(cls, email, permissions):
         with Database() as db:
             id = uuid.uuid4().int
+            id = int(str(id)[:18])
             sql = 'INSERT INTO "user" (id, email, permissions) VALUES (%s, %s, %s)'
 
             db.query(sql, id, email, permissions)
@@ -91,6 +92,7 @@ class Course:
     def create(cls, name):
         with Database() as db:
             id = uuid.uuid4().int
+            id = int(str(id)[:18])
             sql = 'INSERT INTO "course" (id, "name") VALUES (%s, %s)'
 
             db.query(sql, id, name)
@@ -149,6 +151,7 @@ class Session:
     def create(cls, course, start, end, day, location):
         with Database() as db:
             id = uuid.uuid4().int
+            id = int(str(id)[:18])
             sql = 'INSERT INTO "session" (id, course, start, "end", "day", location) VALUES (%s, %s, %s, %s, %s, %s)'
 
             db.query(sql, id, course, start, end, day, location)
