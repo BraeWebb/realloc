@@ -1,15 +1,15 @@
 function click() {
-	var str = "<div class=\"field quater first\"> \
+	var str = "<div class='class-box'><div class=\"field quater first\"> \
 					<input name=\"name\" id=\"name\" type=\"text\" placeholder=\"Class\"> \
 				</div> \
 				<div class=\"field quater first\"> \
 				<select> \
 					<option selected disabled>Weekday</option> \
-					<option value=\"mon\">Monday</option> \
-					<option value=\"tue\">Tuesday</option> \
-					<option value=\"wed\">Wednesday</option> \
-					<option value=\"thu\">Thursday</option> \
-					<option value=\"fri\">Friday</option> \
+					<option value=\"mon\">Mon</option> \
+					<option value=\"tue\">Tue</option> \
+					<option value=\"wed\">Wed</option> \
+					<option value=\"thu\">Thu</option> \
+					<option value=\"fri\">Fri</option> \
 				</select> \
 				</div> \
 				<div class=\"field quater first\"> \
@@ -47,13 +47,61 @@ function click() {
 							  <option value=\"19\">19:00</option> \
 							  <option value=\"20\">20:00</option> \
 							</select> \
-						</div>";
+						</div></div>";
 	var div = document.getElementById("allocform");
 	console.log(div);
 	div.insertAdjacentHTML('beforeend', str);
+
+	/*$("#allocform .class-box").each(function() {
+        console.log($(this).find("#day option:selected").text());
+    })*/
+
+	return false;
+}
+
+function runall() {
+	days = {}
+
+	console.log("test");
+	var ancestor = document.getElementById("allocform");
+	var descs = ancestor.getElementsByTagName('input');
+	var i, j, e;
+	var inputs = [];
+	for(i = 0; i < descs.length; i++) {
+		e = descs[i];
+		inputs.push(e.value);
+	}
+
+	var descs = ancestor.getElementsByTagName('select');
+	var selections = [];
+	for(i = 0; i < descs.length; i++) {
+		e = descs[i];
+		selections.push(e.options[e.selectedIndex].text);
+	}
+
+	results = {};
+	for(i = 0; i < inputs.length; i++) {
+		j = i * 3;
+		l = [selections[j], selections[j + 1], selections[j + 2]];
+		results[inputs[i]] = l;
+	}
+
+	console.log($("#message").val());
+	console.log(results);
+
+	$.ajax({
+        type: "POST",
+        url: "/api/execute",
+        data: {users: $("#message").val(), classes: results},
+        success: function(retrieved) {
+            console.log(retrieved);
+        }
+    });
+
 	return false;
 }
 
 document.onready = function() {
 	document.getElementById("addrow").onclick = click;
+	$("#runall").click(runall);
 }

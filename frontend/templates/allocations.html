@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block header %}
+{% block title %}
+Allocations
+{% endblock %}
+{% endblock %}
+
+{% block content %}
+<div id="allocations" align="center">
+    <table style="width:100%">
+  <tr>
+    <th>Tutor</th>
+    <th>Sessions</th> 
+  </tr>
+  {% for tutor in tutors %}
+  <tr>
+    <td>{{ tutor.email }}</td>
+    <td>{{ tutor.allocation }}</td> 
+  </tr>
+  {% endfor %}
+</table>
+<br>
+</div>
+
+{% endblock %}

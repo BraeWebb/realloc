@@ -67,7 +67,8 @@ Availability
         var days = {'0': 'Mon', '1': 'Tue', '2': 'Wed', '3': 'Thu', '4': 'Fri', '5': 'Sat', '6': 'Sun'};
         for (var entry in data) {
             var day = days[entry];
-            for (var period in data[entry]) {
+            for (var p in data[entry]) {
+                var period = data[entry][p];
                 var time = period[0];
                 var type = period[1];
                 $.ajax({

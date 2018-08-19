@@ -42,7 +42,7 @@ class Person:
         return self._name
 
     def __repr__(self):
-        return f"Person({str(self)})"
+        return "Person({})".format(str(self))
 
     def __hash__(self):
         return hash(self._name)
@@ -82,7 +82,7 @@ class Session:
         return self._id
 
     def __repr__(self):
-        return f"Session({str(self)})"
+        return "Session({})".format(str(self))
 
 
 class SessionCopy(Session):
@@ -96,4 +96,4 @@ class SessionCopy(Session):
         return self._parent
 
     def __repr__(self):
-        return f"SessionCopy({str(self)})"
+        return "SessionCopy({})".format(str(self))

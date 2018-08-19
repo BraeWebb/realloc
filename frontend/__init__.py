@@ -1,5 +1,6 @@
 from flask import Flask, render_template, jsonify, request, abort, url_for, redirect
 from flask_login import LoginManager, login_required, login_user, logout_user
+from backend.backend_run import run
 
 from api.model import User, Session, Course
 
@@ -41,6 +42,11 @@ def availability():
     return render_template("availability.html")
 
 
+@app.route('/allocations')
+def allocations():
+    return render_template("allocations.html", tutors=[{"email": "fred@fred.com", "allocation": "T02, T03"}])
+
+
 @app.route('/times')
 @login_required
 def times():
@@ -62,6 +68,14 @@ def logout():
 @login_manager.unauthorized_handler
 def unauthorized_handle():
     return render_template('unauthorized.html')
+
+
+@app.route('/api/execute', methods=['POST'])
+def execute_algorithm():
+    users = request.form.get('users').split("\n")
+    #pull users from DB
+
+    classes = request.form.get('classes')  # {session name: [day, start, end]}
 
 
 @app.route('/api/login', methods=['POST'])
@@ -210,4 +224,4 @@ def create_session():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5432)
+    app.run(debug=True, port=5433)
