@@ -71,7 +71,7 @@ def login():
     user = User.login(email, password)
 
     if user is None:
-        return redirect(url_for('index'))
+        return "Error occurred logging in"
 
     login_user(user)
     next_url = request.form.get('next')
@@ -87,7 +87,7 @@ def signup_api():
     user = User.create(email, password, 0)
 
     if user is None:
-        return redirect(url_for('index'))
+        return "Error occurred signing up"
 
     login_user(user)
     next_url = request.form.get('next')

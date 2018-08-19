@@ -27,6 +27,8 @@ class User:
             if db.exists("user", email=email):
                 return None
 
+            password = hashlib.sha224(bytes(password, "utf-8")).hexdigest()
+
             id = uuid.uuid4().int
             id = int(str(id)[:10])
             sql = 'INSERT INTO "user" (id, email, permission, password) VALUES (%s, %s, %s, %s)'
