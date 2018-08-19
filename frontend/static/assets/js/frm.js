@@ -95,7 +95,7 @@ function runall() {
         data: {users: $("#message").val(), classes: JSON.stringify(results)},
         success: function(retrieved) {
 
-            console.log(retrieved);
+            console.log(JSON.stringify(retrieved));
 
 						var form = $('<form action="/allocations" method="post">' +
 							'<input type="hidden" name="tutors" id="tutors" value="' + JSON.stringify(retrieved) + '" />' +
