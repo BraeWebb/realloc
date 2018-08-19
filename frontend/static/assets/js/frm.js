@@ -95,7 +95,7 @@ function runall() {
         data: {users: $("#message").val(), classes: JSON.stringify(results)},
         success: function(retrieved) {
 
-            console.log(retrieved);
+            console.log(JSON.stringify(retrieved));
 
             var res = "<table style=\"width:100%\"> \
             			<tr> \
