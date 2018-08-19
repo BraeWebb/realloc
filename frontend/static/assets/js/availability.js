@@ -231,9 +231,9 @@
                 console.log("s", s);
                 for (i = 0; i < $slots.length; i++) {
                     console.log("time: " + $slots.eq(i).data('time'));
-                    console.log("s[0]: " + s[0])
-                    if ($slots.eq(i).data('time') == s[1] && s[2] == 1) { plugin.select($slots.eq(i)); }
-                    if ($slots.eq(i).data('time') == s[1] && s[2] == 2) { plugin.select_alt($slots.eq(i)); }
+                    console.log("ds[0]: " + ds[0] + " " + ds[1] + " " + ds[2]);
+                    if ($slots.eq(i).data('time') == ds[1] && ds[2] == 1) { plugin.select($slots.eq(i)); }
+                    if ($slots.eq(i).data('time') == ds[1] && ds[2] == 2) { plugin.select_alt($slots.eq(i)); }
                 }
             })
         });
