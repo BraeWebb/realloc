@@ -84,7 +84,7 @@ class Course:
         with Database() as db:
             if db.exists("course", id=self.id):
                 sql = 'SELECT "name" FROM "course" WHERE id = %s'
-                self.name = db.query(sql, self.id, limit=1)[0]
+                self.name = db.query(sql, self.id, limit=1)[0][0]
             else:
                 raise KeyError('Course {} not found'.format(self.id))
 
