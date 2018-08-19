@@ -42,9 +42,9 @@ def availability():
     return render_template("availability.html")
 
 
-@app.route('/allocations')
+@app.route('/allocations', methods=['POST'])
 def allocations():
-    tutors = request.args.get('tutors')
+    tutors = json.loads(request.form.get('tutors'))
     return render_template("allocations.html", tutors=tutors)
 
 
