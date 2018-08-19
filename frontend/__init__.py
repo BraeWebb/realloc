@@ -223,5 +223,15 @@ def create_session():
     return jsonify(**session.json()), 201
 
 
+@app.route('api/user/<user>/availability', methods=['DELETE'])
+def remove_availability(user):
+    try:
+        user = User(user)
+    except KeyError:
+        abort(404)
+    user.remove_availability()
+    return jsonify(**user.json())
+
+
 if __name__ == '__main__':
     app.run(debug=True, port=5433)
