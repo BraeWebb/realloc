@@ -44,8 +44,9 @@ def availability():
 
 @app.route('/allocations', methods=['POST'])
 def allocations():
-    tutors = json.loads(request.form.get('tutors').replace("'", '"'))
-    return render_template("allocations.html", tutors=tutors)
+    print(request.form.get('tutors'))
+    #tutors = json.loads(request.form.get('tutors').replace("'", '"'))
+    return render_template("allocations.html", tutors=request.form.get('tutors'))
 
 
 @app.route('/times')
