@@ -109,8 +109,7 @@ class User:
 
     def remove_availability(self):
         with Database() as db:
-            delete_query = db.query('DELETE FROM "availability" WHERE user_id = %s')
-            db.query(delete_query, self.id)
+            db.query('DELETE FROM "availability" WHERE user_id = %s', self.id)
 
     def get_allocations(self, revision, course):
         with Database() as db:
