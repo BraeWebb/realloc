@@ -86,13 +86,13 @@ function runall() {
 		results[inputs[i]] = l;
 	}
 
-	console.log($("#message").val())
+	console.log($("#message").val());
 	console.log(results);
 
 	$.ajax({
         type: "POST",
         url: "/api/execute",
-        data: {users: $("#message").value, classes: results},
+        data: {users: $("#message").val(), classes: results},
         success: function(retrieved) {
             console.log(retrieved);
         }
