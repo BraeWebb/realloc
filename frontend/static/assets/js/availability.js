@@ -283,7 +283,7 @@
         var hours = date.getHours()
             , minutes = date.getMinutes()
             , ampm = hours >= 12 ? 'pm' : 'am';
-        return hours + ':' + ('0' + minutes).slice(-2) + ampm;
+        return hours + ':' + ('0' + minutes).slice(-2);
     }
 
     /**
