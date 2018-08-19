@@ -6,7 +6,7 @@ from api.database import Database
 
 
 def convert_time(time):
-    return "{}:{}".format(time.hour, time.minute)
+    return "{0}:{1:02d}".format(time.hour, time.minute)
 
 
 class User:
@@ -103,9 +103,13 @@ class User:
 
     def add_availability(self, day, start, type):
         with Database() as db:
-            db.query('DELETE FROM "availability" WHERE user_id = %s', self.id)
+            # db.query('DELETE FROM "availability" WHERE user_id = %s', self.id)
             insert_query = 'INSERT INTO "availability" (user_id, "day", start, "type") VALUES (%s, %s, %s, %s)'
             db.query(insert_query, self.id, day, start, type)
+
+    def remove_availability(self):
+        with Database() as db:
+            db.query('DELETE FROM "availability" WHERE user_id = %s', self.id)
 
     def get_allocations(self, revision, course):
         with Database() as db:
@@ -198,8 +202,8 @@ class Session:
 
     def json(self):
         return {"id": self.id, "course": self.course,
-                "start": "{}:{}".format(self.start.hour, self.start.minute),
-                "end": "{}:{}".format(self.start.hour, self.start.minute),
+                "start": convert_time(self.start),
+                "end": convert_time(self.end),
                 "day": self.day, "location": self.location}
 
 
@@ -212,6 +216,3 @@ class FakeUser(User):
         self.is_authenticated = True
         self.is_active = True
         self.is_anonymous = False
-
-
-User = FakeUser

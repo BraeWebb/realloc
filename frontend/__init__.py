@@ -20,7 +20,6 @@ def load_user(user_id):
 
 @app.route('/')
 def index():
-    login_user(User(0))
     return render_template("promo.html")
 
 
@@ -78,14 +77,16 @@ def execute_algorithm():
 
     availabilities = {}
 
+    app.logger.info("Classes: {}".format(classes))
+
     for user in users:
         user = User.by_email(user)
         availabilities[user.email] = user.get_availability()  # {user: [[day, start, type]]}
 
+    app.logger.info("Classes 2: {}".format(classes))
     results = backend.backend_run.run(availabilities, classes)
 
     return redirect(url_for('/allocations', tutors=results))
-
 
 
 @app.route('/api/login', methods=['POST'])
@@ -231,6 +232,16 @@ def create_session():
     session = Session.create(request.form.get('course'), request.form.get('start'), request.form.get('end'),
                              request.form.get('day'), request.form.get('location'))
     return jsonify(**session.json()), 201
+
+
+@app.route('/api/user/<user>/availability', methods=['DELETE'])
+def remove_availability(user):
+    try:
+        user = User(user)
+    except KeyError:
+        abort(404)
+    user.remove_availability()
+    return jsonify(user.get_availability())
 
 
 if __name__ == '__main__':
