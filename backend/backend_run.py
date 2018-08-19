@@ -104,7 +104,7 @@ def run(people_input, session_input):
     alloc = random.choice(all_allocs)
     output = []
     for person in alloc:
-        output.append({"email": str(person), "allocations": ", ".join([str(i) for i in alloc[person]])})
+        output.append({"email": str(person), "allocation": ", ".join([str(i) for i in alloc[person]])})
     return output  # [{email: email, allocations: allocations}, ...]
 
 
