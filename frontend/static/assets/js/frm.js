@@ -94,7 +94,35 @@ function runall() {
         url: "/api/execute",
         data: {users: $("#message").val(), classes: JSON.stringify(results)},
         success: function(retrieved) {
+
             console.log(retrieved);
+
+            var res = "<table style=\"width:100%\"> \
+            			<tr> \
+            			<th>Tutor</th> \
+            			<th>Session(s)</th> \
+            			</tr> \
+            			"
+            for(i = 0; i < retrieved.length; i++) {
+            	r = retrieved[i];
+            	email = r["email"];
+            	alloc = r["allocation"];
+            	res += "<tr> \
+            			<td>" + email + "</td> \
+            			<td>" + alloc + "</td> \
+            			</tr> \
+            			";
+            }
+            res += "</table>"
+            var div = document.getElementById("resultarea");
+			console.log(div);
+			div.insertAdjacentHTML('beforeend', res);
+
+						/*var form = $('<form action="/allocations" method="post">' +
+							'<input type="hidden" name="tutors" id="tutors" value="' + JSON.stringify(retrieved) + '" />' +
+							'</form>');
+						//$('body').append(form);
+						//form.submit();*/
         }
     });
 }

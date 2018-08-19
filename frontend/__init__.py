@@ -42,10 +42,11 @@ def availability():
     return render_template("availability.html")
 
 
-@app.route('/allocations')
+@app.route('/allocations', methods=['POST'])
 def allocations():
-    tutors = request.args.get('tutors')
-    return render_template("allocations.html", tutors=tutors)
+    print(request.form.get('tutors'))
+    #tutors = json.loads(request.form.get('tutors').replace("'", '"'))
+    return render_template("allocations.html", tutors=request.form.get('tutors'))
 
 
 @app.route('/times')
@@ -74,7 +75,7 @@ def unauthorized_handle():
 @app.route('/api/execute', methods=['POST'])
 def execute_algorithm():
     users = request.form.get('users').split("\n")
-    classes = json.loads(request.form['classes'])  # {session name: [day, start, end]}
+    classes = json.loads(request.form['classes'].replace("'", '"'))  # {session name: [day, start, end]}
 
     availabilities = {}
 
@@ -92,8 +93,7 @@ def execute_algorithm():
     app.logger.info("Classes 2: {}".format(classes))
     results = backend.backend_run.run(availabilities, classes)
 
-
-    return redirect(url_for('/allocations', tutors=results))
+    return jsonify(results)
 
 
 @app.route('/api/login', methods=['POST'])
