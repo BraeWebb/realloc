@@ -40,6 +40,11 @@ def availability():
     return render_template("availability.html")
 
 
+@app.route('/allocations')
+def allocations():
+    return render_template("allocations.html", tutors=[{"email": "fred@fred.com", "allocation": "T02, T03"}])
+
+
 @app.route('/times')
 @login_required
 def times():
@@ -209,4 +214,4 @@ def create_session():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5432)
+    app.run(debug=True, port=5433)

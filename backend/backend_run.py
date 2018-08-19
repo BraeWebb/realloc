@@ -4,17 +4,21 @@ People input format:
 
 Session input format:
     {session name: [day, start, end]}
+
+Output format:
+    [{person name: [session name, ...]}, ...]
 """
 
 from algo import Allocator
 from structs import Person, Session
 from pprint import pprint
 import sys
+import random
 
 RUN_COUNT = 10
 
-TIMES = ["8:00am", "9:00am", "10:00am", "11:00am", "12:00pm", "13:00pm", "14:00pm", "15:00pm", "16:00pm", "17:00pm",
-         "18:00pm", "19:00pm", "20:00pm"]
+TIMES = ["8:00", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00",
+         "18:00", "19:00", "20:00"]
 
 
 def time_lt(a, b):
@@ -96,7 +100,11 @@ def run_multi(people, sessions):
 
 
 def run(people_input, session_input):
-    return run_multi(*setup(people_input, session_input))
+    all_allocs = run_multi(*setup(people_input, session_input))
+    alloc = random.choice(all_allocs)
+    output = []
+    for person in alloc:
+        output.append({"email": person, "allocations": ", ".join(alloc[person])})
 
 
 def is_avail(session_time, person_details):
