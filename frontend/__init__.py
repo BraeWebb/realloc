@@ -44,7 +44,8 @@ def availability():
 
 @app.route('/allocations')
 def allocations():
-    return render_template("allocations.html", tutors=[{"email": "fred@fred.com", "allocation": "T02, T03"}])
+    tutors = request.args.get('tutors')
+    return render_template("allocations.html", tutors=tutors)
 
 
 @app.route('/times')
@@ -82,7 +83,8 @@ def execute_algorithm():
         availabilities[user.email] = user.get_availability()  # {user: [[day, start, type]]}
 
     results = backend.backend_run.run(availabilities, classes)
-    #line to get 100 before Liam
+
+    return redirect(url_for('/allocations', tutors=results))
 
 
 
