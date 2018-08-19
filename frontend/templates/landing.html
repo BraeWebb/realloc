@@ -26,9 +26,7 @@
                 <div id="navigation-container">
                     <ul>
                     <li><a href={{ url_for('index') }}>Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href={{ url_for('signup') }}>Login/Signup</a></li>
+                    <li><a href="/signup?next={{ request.path }}">Login/Signup</a></li>
                   </ul>
                 </div>
 </header>
