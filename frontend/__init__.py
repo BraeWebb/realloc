@@ -74,6 +74,7 @@ def unauthorized_handle():
 def execute_algorithm():
     users = request.form.get('users').split("\n")
     classes = request.form.get('classes')  # {session name: [day, start, end]}
+    print(classes)
 
     availabilities = {}
 
