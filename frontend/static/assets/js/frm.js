@@ -97,8 +97,6 @@ function runall() {
             console.log(retrieved);
         }
     });
-
-	return false;
 }
 
 document.onready = function() {
