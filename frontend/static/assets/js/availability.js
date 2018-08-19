@@ -224,8 +224,8 @@
             var $slots = plugin.$el.find('.time-slot[data-day="' + d + '"]');
             $.each(ds, function(_, s) {
                 for (i = 0; i < $slots.length; i++) {
-                    if ($slots.eq(i).data('time') >= s[1]) { break; }
-                    if ($slots.eq(i).data('time') >= s[0]) { plugin.select($slots.eq(i)); }
+                    if ($slots.eq(i).data('time') == s[0] && s[1] == 1) { plugin.select($slots.eq(i)); }
+                    if ($slots.eq(i).data('time') == s[0] && s[1] == 2) { plugin.select_alt($slots.eq(i)); }
                 }
             })
         });
