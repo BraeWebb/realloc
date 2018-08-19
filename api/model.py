@@ -1,4 +1,5 @@
 import uuid
+import hashlib
 from datetime import datetime
 
 from api.database import Database
@@ -21,15 +22,30 @@ class User:
         self.is_anonymous = False
 
     @classmethod
-    def create(cls, email, permissions):
+    def create(cls, email, password, permissions):
         with Database() as db:
+            if db.exists("user", email=email):
+                return None
+
             id = uuid.uuid4().int
             id = int(str(id)[:18])
-            sql = 'INSERT INTO "user" (id, email, permission) VALUES (%s, %s, %s)'
+            sql = 'INSERT INTO "user" (id, email, permission, password) VALUES (%s, %s, %s, %s)'
 
-            db.query(sql, id, email, permissions)
+            db.query(sql, id, email, permissions, password)
 
             return User(id)
+
+    @classmethod
+    def login(cls, email, password):
+        with Database() as db:
+            password = hashlib.sha224(bytes(password, "utf-8")).hexdigest()
+            sql = 'SELECT "id", password FROM "user" WHERE email = %s'
+
+            user_id, db_password = db.query(sql, email)[0]
+            if password == db_password:
+                return User(user_id)
+            return None
+
 
     def update(self, email, permissions):
         with Database() as db:
@@ -76,6 +92,7 @@ class User:
             result = db.query(sql, self.id, revision, course)
 
             return [Session(row[0], course) for row in result]
+
 
 class Course:
     def __init__(self, id):
