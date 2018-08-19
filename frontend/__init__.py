@@ -1,6 +1,6 @@
 from flask import Flask, render_template, jsonify, request, abort, url_for, redirect
 from flask_login import LoginManager, login_required, login_user, logout_user
-from backend.backend_run import run
+import backend.backend_run
 
 from api.model import User, Session, Course
 
@@ -73,9 +73,17 @@ def unauthorized_handle():
 @app.route('/api/execute', methods=['POST'])
 def execute_algorithm():
     users = request.form.get('users').split("\n")
-    #pull users from DB
-
     classes = request.form.get('classes')  # {session name: [day, start, end]}
+
+    availabilities = {}
+
+    for user in users:
+        user = User.by_email(user)
+        availabilities[user.email] = user.get_availability()  # {user: [[day, start, type]]}
+
+    results = backend.backend_run.run(availabilities, classes)
+    #line to get 100 before Liam
+
 
 
 @app.route('/api/login', methods=['POST'])

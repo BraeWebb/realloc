@@ -13,7 +13,7 @@
 	:root {
 		--main-colour: #4e9ce0;
 		--sec-colour: #0c508c;
-		--pale-colour: #9ec3e2;
+		--pale-colour: #2f516d;
 		--highlight-colour: #739fc6;
 	}
 
@@ -2781,7 +2781,7 @@
 		}
 
 	#header {
-		color: #fff;
+		color: #221F1F;
 		cursor: default;
 		height: 3.25em;
 		left: 0;
@@ -2799,7 +2799,7 @@
 		}
 
 		#header .logo {
-			color: #ffffff;
+			color: #221F1F;
 			display: inline-block;
 			font-weight: 400;
 			height: inherit;
@@ -2813,7 +2813,7 @@
 		}
 
 			#header .logo strong {
-				color: #ffffff;
+				color: #221F1F;
 				font-weight: 600;
 			}
 
@@ -2830,7 +2830,7 @@
 		}
 
 			#header a:hover {
-				color: #ffffff;
+				color: #221F1F;
 			}
 
 			#header a:last-child {
@@ -2992,8 +2992,8 @@
 /* Banner */
 
 	#banner {
-		padding: 6em 0 9em 0;
-		background-image: url(../../images/banner.jpg);
+		padding: 0;
+		background-image: none;
 		background-size: cover;
 		background-position: bottom;
 		background-attachment: fixed;
@@ -3005,7 +3005,7 @@
 
 		#banner:before {
 			content: '';
-			background: rgba(75, 75, 93, 0.85);
+			background: white;
 			position: absolute;
 			width: 100%;
 			height: 100%;
@@ -3023,7 +3023,7 @@
 		#banner h1 {
 			font-size: 3.5em;
 			font-weight: 400;
-			color: #fff;
+			color: #221F1F;
 			line-height: 1em;
 			margin: 0 0 1em 0;
 			padding: 0;
@@ -3031,7 +3031,7 @@
 
 		#banner h3 {
 			font-weight: 400;
-			color: #fff;
+			color: #221F1F;
 			margin: 0;
 			font-size: 1.5em;
 		}
@@ -3043,7 +3043,7 @@
 
 		#banner p {
 			font-size: 1em;
-			color: rgba(255, 255, 255, 0.55);
+			color: rgb(59, 59, 59);
 			margin-bottom: 1.75em;
 		}
 
@@ -3244,3 +3244,49 @@
 	position: absolute;
 	bottom: 80px;
 }
+
+#navigation-container {
+	margin: 0;
+	height: 70px;
+  }
+  
+  .navigation-bar {
+	background:-webkit-linear-gradient(0deg, #3782D6, rgb(102, 159, 224));
+	background:-moz-linear-gradient(0deg, #3782D6, rgb(102, 159, 224));
+	height: 70px;
+	width: 100%;
+	text-align: center;
+  }
+  .navigation-bar img{
+  float:left;
+  }
+  .navigation-bar ul {
+	padding: 0px;
+	margin: 0px;
+	text-align: center;
+	display:inline-block;
+	vertical-align:top;
+  }
+  
+  .navigation-bar li {
+	list-style-type: none;
+	padding: 0px;
+	height: 24px;
+	margin-top: 4px;
+	margin-bottom: 4px;
+	display: inline;
+  }
+  
+  .navigation-bar li a {
+	color: #fff;
+	font-size: 16px;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	text-decoration: none;
+	line-height: 70px;
+	padding: 5px 15px;
+	opacity: 1;
+  }
+  
+  #menu {
+	float: right;
+  }

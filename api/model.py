@@ -26,6 +26,17 @@ class User:
         self.is_anonymous = False
 
     @classmethod
+    def by_email(cls, email):
+        with Database() as db:
+            if db.exists("user", email=email):
+                sql = 'SELECT id FROM "user" WHERE email = %s'
+                id = db.query(sql, email)[0][0]
+            else:
+                raise KeyError('User {} not found'.format(email))
+
+        return User(id)
+
+    @classmethod
     def create(cls, email, password, permissions):
         with Database() as db:
             if db.exists("user", email=email):
@@ -92,8 +103,9 @@ class User:
 
     def add_availability(self, day, start, type):
         with Database() as db:
-            sql = 'INSERT INTO "availability" (user_id, "day", start, "type") VALUES (%s, %s, %s, %s)'
-            db.query(sql, self.id, day, start, type)
+            db.query('DELETE FROM "availability" WHERE user_id = %s', self.id)
+            insert_query = 'INSERT INTO "availability" (user_id, "day", start, "type") VALUES (%s, %s, %s, %s)'
+            db.query(insert_query, self.id, day, start, type)
 
     def get_allocations(self, revision, course):
         with Database() as db:
