@@ -6,7 +6,7 @@ from api.database import Database
 
 
 def convert_time(time):
-    return "{}:{}".format(time.hour, time.minute)
+    return "{}:{1:02d}".format(time.hour, time.minute)
 
 
 class User:
@@ -202,8 +202,8 @@ class Session:
 
     def json(self):
         return {"id": self.id, "course": self.course,
-                "start": "{}:{}".format(self.start.hour, self.start.minute),
-                "end": "{}:{}".format(self.start.hour, self.start.minute),
+                "start": convert_time(self.start),
+                "end": convert_time(self.end),
                 "day": self.day, "location": self.location}
 
 
