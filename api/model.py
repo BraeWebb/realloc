@@ -216,6 +216,3 @@ class FakeUser(User):
         self.is_authenticated = True
         self.is_active = True
         self.is_anonymous = False
-
-
-User = FakeUser

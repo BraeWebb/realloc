@@ -20,7 +20,6 @@ def load_user(user_id):
 
 @app.route('/')
 def index():
-    login_user(User(0))
     return render_template("promo.html")
 
 
@@ -85,7 +84,6 @@ def execute_algorithm():
     results = backend.backend_run.run(availabilities, classes)
 
     return redirect(url_for('/allocations', tutors=results))
-
 
 
 @app.route('/api/login', methods=['POST'])
