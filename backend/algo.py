@@ -1,5 +1,5 @@
 from typing import List
-from .structs import *
+from structs import *
 import random
 import munkres
 import sys
@@ -59,7 +59,12 @@ class Allocator:
                 row.append(pref)
             self._matrix.append(row)
 
+    def _reset(self):
+        for person in self._people:
+            person.set_allocs([])
+
     def _preprocess(self):
+        self._reset()
         self._fill_slots()
         self._fill_people()
         self._pre_resolve_clashes()
