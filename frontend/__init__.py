@@ -92,7 +92,7 @@ def execute_algorithm():
     app.logger.info("Classes 2: {}".format(classes))
     results = backend.backend_run.run(availabilities, classes)
 
-    return redirect(url_for('allocations', tutors=results))
+    return jsonify(results)
 
 
 @app.route('/api/login', methods=['POST'])
