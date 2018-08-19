@@ -27,13 +27,15 @@ class User:
             if db.exists("user", email=email):
                 return None
 
+            password = hashlib.sha224(bytes(password, "utf-8")).hexdigest()
+
             id = uuid.uuid4().int
-            id = int(str(id)[:18])
+            id = int(str(id)[:10])
             sql = 'INSERT INTO "user" (id, email, permission, password) VALUES (%s, %s, %s, %s)'
 
             db.query(sql, id, email, permissions, password)
 
-            return User(id)
+        return User(id)
 
     @classmethod
     def login(cls, email, password):
@@ -42,9 +44,9 @@ class User:
             sql = 'SELECT "id", password FROM "user" WHERE email = %s'
 
             user_id, db_password = db.query(sql, email)[0]
-            if password == db_password:
-                return User(user_id)
-            return None
+        if password == db_password:
+            return User(user_id)
+        return None
 
 
     def update(self, email, permissions):
@@ -109,7 +111,7 @@ class Course:
     def create(cls, name):
         with Database() as db:
             id = uuid.uuid4().int
-            id = int(str(id)[:18])
+            id = int(str(id)[:10])
             sql = 'INSERT INTO "course" (id, "name") VALUES (%s, %s)'
 
             db.query(sql, id, name)
@@ -168,7 +170,7 @@ class Session:
     def create(cls, course, start, end, day, location):
         with Database() as db:
             id = uuid.uuid4().int
-            id = int(str(id)[:18])
+            id = int(str(id)[:10])
             sql = 'INSERT INTO "session" (id, course, start, "end", "day", location) VALUES (%s, %s, %s, %s, %s, %s)'
 
             db.query(sql, id, course, start, end, day, location)
@@ -190,4 +192,4 @@ class FakeUser(User):
         self.is_anonymous = False
 
 
-# User = FakeUser
+User = FakeUser
