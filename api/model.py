@@ -28,7 +28,7 @@ class User:
                 return None
 
             id = uuid.uuid4().int
-            id = int(str(id)[:18])
+            id = int(str(id)[:10])
             sql = 'INSERT INTO "user" (id, email, permission, password) VALUES (%s, %s, %s, %s)'
 
             db.query(sql, id, email, permissions, password)
@@ -109,7 +109,7 @@ class Course:
     def create(cls, name):
         with Database() as db:
             id = uuid.uuid4().int
-            id = int(str(id)[:18])
+            id = int(str(id)[:10])
             sql = 'INSERT INTO "course" (id, "name") VALUES (%s, %s)'
 
             db.query(sql, id, name)
@@ -168,7 +168,7 @@ class Session:
     def create(cls, course, start, end, day, location):
         with Database() as db:
             id = uuid.uuid4().int
-            id = int(str(id)[:18])
+            id = int(str(id)[:10])
             sql = 'INSERT INTO "session" (id, course, start, "end", "day", location) VALUES (%s, %s, %s, %s, %s, %s)'
 
             db.query(sql, id, course, start, end, day, location)
