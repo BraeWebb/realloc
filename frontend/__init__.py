@@ -77,10 +77,13 @@ def execute_algorithm():
 
     availabilities = {}
 
+    app.logger.info("Classes: {}".format(classes))
+
     for user in users:
         user = User.by_email(user)
         availabilities[user.email] = user.get_availability()  # {user: [[day, start, type]]}
 
+    app.logger.info("Classes 2: {}".format(classes))
     results = backend.backend_run.run(availabilities, classes)
 
     return redirect(url_for('/allocations', tutors=results))
