@@ -3238,3 +3238,9 @@
 			}
 
 		}
+
+
+.sidebar .nav>li.bottom {
+	position: absolute;
+	bottom: 80px;
+}
