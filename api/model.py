@@ -5,6 +5,10 @@ from datetime import datetime
 from api.database import Database
 
 
+def convert_time(time):
+    return "{}:{}".format(time.hour, time.minute)
+
+
 class User:
     def __init__(self, id):
         self.id = id
@@ -80,8 +84,11 @@ class User:
         with Database() as db:
             sql = 'SELECT "day", start, "type" FROM availability WHERE user_id = %s'
             result = db.query(sql, self.id)
+            results = []
+            for r in result:
+                results.append([r[0], convert_time(r[1]), r[2]])
 
-            return result
+            return results
 
     def add_availability(self, day, start, type):
         with Database() as db:
